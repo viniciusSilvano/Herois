@@ -18,18 +18,12 @@ public class Duelo {
 	private BancoMemoriaUtil bancoMemoriaUtil = BancoMemoriaUtil.getInstance();
 	private List<Personagem> herois;
 	private Random random;
-	private Personagem heroi1;
-	private Personagem heroi2;
-	private Personagem heroiVencedor;
-	private int qntdPartidas = 0;
-	public String nome;
-	
 	
 	public Duelo(Random random) {
 		this.random = random;
 	}
 		
-	private void InicializarListaDeHerois() {
+	protected void InicializarListaDeHerois() {
 		try {
 			this.herois = bancoMemoriaUtil.carregaPersonagens();
 		} catch (IOException e) {
@@ -38,41 +32,34 @@ public class Duelo {
 		}
 	}
 	
-	protected void prepararPartida() {
-		InicializarListaDeHerois();
-		escolherHerois(randomizarHerois());
-	}
 	
-	private Personagem randomizarHerois() {
+	protected Personagem randomizarHerois() {
 		return this.herois.get(random.nextInt(herois.size()));
 	}
 	
-	private void escolherHerois(Personagem heroi1) {
+	protected boolean validarHerois(Personagem heroi1, Personagem heroi2 ) {
+		if((!heroi2.getAlinhamento().equals(heroi1.getAlinhamento()))
+				&& heroi1 != heroi2) {
+			return true;
+		}
+		return false;
+	}
+	
+	/*private void escolherHerois(Personagem heroi1) {
 		this.heroi1 = heroi1;
 		this.heroi2 = heroi1;
 		boolean condicao = true;
 		while(condicao) {
 			this.heroi2 = randomizarHerois();
-			if((!this.heroi2.getAlinhamento().equals(this.heroi1.getAlinhamento()))
-					&& this.heroi1 != heroi2) {
-				condicao = false;
-			}
+			
 			
 		}
 		System.out.println("Heroi 1: " + this.heroi1.getNome() + " Alinhamento: " + this.heroi1.getAlinhamento());
 		System.out.println("Heroi 2: " + this.heroi2.getNome() + " Alinhamento: " + this.heroi2.getAlinhamento());
 		//iniciarPartida();
-	}
+	}*/
 	
-	protected Personagem iniciarPartida() {
-		System.out.println("---------------------------------------------------");
-		System.out.println("Partida " + (qntdPartidas + 1) + " começando!!!!!");
-		System.out.println("---------------------------------------------------");
-		habilidadeEscolhida();
-		return this.heroiVencedor;
-	}
-	
-	private void habilidadeEscolhida() {
+	protected void iniciarCombate() {
 		switch(EnumPersonagemHabilidades.getRandomHabilidades(this.random)) {
 		case INTELIGENCIA:
 			System.out.println("Habilidade: Inteligência");
