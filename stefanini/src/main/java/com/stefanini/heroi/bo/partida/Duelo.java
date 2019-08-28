@@ -20,6 +20,7 @@ public class Duelo {
 	private Random random;
 	private Personagem heroi1;
 	private Personagem heroi2;
+	private Personagem heroiVencedor;
 	private int qntdPartidas = 0;
 	public String nome;
 	
@@ -37,7 +38,7 @@ public class Duelo {
 		}
 	}
 	
-	public void prepararPartida() {
+	protected void prepararPartida() {
 		InicializarListaDeHerois();
 		escolherHerois(randomizarHerois());
 	}
@@ -63,11 +64,12 @@ public class Duelo {
 		//iniciarPartida();
 	}
 	
-	private void iniciarPartida() {
+	protected Personagem iniciarPartida() {
 		System.out.println("---------------------------------------------------");
 		System.out.println("Partida " + (qntdPartidas + 1) + " começando!!!!!");
 		System.out.println("---------------------------------------------------");
 		habilidadeEscolhida();
+		return this.heroiVencedor;
 	}
 	
 	private void habilidadeEscolhida() {
@@ -99,24 +101,24 @@ public class Duelo {
 		}
 	}
 	
-	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab) {
+	private void compararHabilidades(Integer heroi1Hab,Integer heroi2Hab) {
 		System.out.println("Pontos do heroi 1: " + heroi1Hab);
 		System.out.println("Pontos do heroi 2: " + heroi2Hab);
 		if(heroi1Hab.compareTo(heroi2Hab) == 0) {
 			this.habilidadeEscolhida();;
 			System.out.println("Empate");
-			return null;
+			this.heroiVencedor = null;
 		}
-		else if(heroi1Hab.compareTo(heroi2Hab) < 1) {
+		else if(heroi1Hab.compareTo(heroi2Hab) > 1) {
 			this.heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			this.heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 1 venceu a partida !!!");
-			return this.heroi1;
+			this.heroiVencedor =  this.heroi1;
 		}else {
 			this.heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			this.heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 2 venceu a partida !!!");
-			return this.heroi2;
+			this.heroiVencedor =  this.heroi2;
 			
 		}
 	}

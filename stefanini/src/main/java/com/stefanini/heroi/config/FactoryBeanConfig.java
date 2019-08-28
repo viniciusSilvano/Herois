@@ -8,7 +8,7 @@ import com.stefanini.heroi.model.DueloFactory;
 
 @Configuration
 public class FactoryBeanConfig { 
-	    @Bean(name = "tool")
+	    @Bean(name = "duelo")
 	    public DueloFactory dueloFactory() {
 	        DueloFactory factory = new DueloFactory();
 	        return factory;
