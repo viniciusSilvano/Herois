@@ -1,13 +1,20 @@
 package com.stefanini.heroi.util;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import com.stefanini.heroi.dto.HeroisDto;
 import com.stefanini.heroi.dto.PersonagemDto;
 import com.stefanini.heroi.dto.PoderesDto;
 
+@Component
+@Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class BancoMemoriaUtil {
 	
 	public static List<PoderesDto> poderesDtos;

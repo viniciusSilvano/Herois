@@ -1,4 +1,4 @@
-package com.stefanini.heroi.controller;
+package com.stefanini.heroi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,6 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
+import com.stefanini.heroi.bo.Duelo;
+
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
 @EnableAutoConfiguration
@@ -15,11 +17,12 @@ import org.springframework.web.WebApplicationInitializer;
 // application
 @Configuration
 // SpringBootWebLogicLegacyApplication is a SpringBootServletInitializer subclass and override its configure method.
-@ComponentScan
+@ComponentScan(basePackages = "com.stefanini.heroi.*")
 public class HeroisStefaniniApplication extends SpringBootServletInitializer implements WebApplicationInitializer {
 
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
+		new Duelo().randomizarHerois();
 		SpringApplication.run(HeroisStefaniniApplication.class, args);
 	}
 
