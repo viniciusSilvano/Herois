@@ -1,4 +1,4 @@
-package com.stefanini.heroi.dto;
+package com.stefanini.heroi.model;
 
 /**
  * Classe que irá carregar todos os personagens

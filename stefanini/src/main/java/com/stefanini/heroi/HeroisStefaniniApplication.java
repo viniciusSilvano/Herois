@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
 import com.stefanini.heroi.bo.Duelo;
-import com.stefanini.heroi.dto.Personagem;
+import com.stefanini.heroi.model.Personagem;
 
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired

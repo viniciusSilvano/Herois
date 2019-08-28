@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.stefanini.heroi.dto.Personagem;
+import com.stefanini.heroi.model.Personagem;
 
 public class PersonagemUtil {
 	

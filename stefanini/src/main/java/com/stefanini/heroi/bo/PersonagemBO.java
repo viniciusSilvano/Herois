@@ -3,7 +3,7 @@ package com.stefanini.heroi.bo;
 import java.io.IOException;
 import java.util.List;
 
-import com.stefanini.heroi.dto.Personagem;
+import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 
 /**

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stefanini.heroi.bo.PersonagemBO;
-import com.stefanini.heroi.dto.Personagem;
 import com.stefanini.heroi.dto.PoderesDto;
+import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 
 /**
