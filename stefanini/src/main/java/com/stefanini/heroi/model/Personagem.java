@@ -11,7 +11,7 @@ public class Personagem {
 
 	private String nome;
 	private String alinhamento;
-	private EnumPersonagemSituacao situacao;
+	private EnumPersonagemSituacao situacao = EnumPersonagemSituacao.INDIFERENTE;
 	private Integer inteligencia;
 	private Integer forca;
 	private Integer destreza;

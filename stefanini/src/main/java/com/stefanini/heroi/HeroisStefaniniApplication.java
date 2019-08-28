@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
 import com.stefanini.heroi.bo.Duelo;
-import com.stefanini.heroi.bo.Partida;
 import com.stefanini.heroi.model.Personagem;
 
 //Tell Spring to automatically inject any dependencies that are marked in
@@ -28,7 +27,7 @@ public class HeroisStefaniniApplication extends SpringBootServletInitializer imp
 
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
-		Duelo duelo = new Duelo(new Random(),new Partida());
+		Duelo duelo = new Duelo(new Random());
 		duelo.prepararPartida();
 		SpringApplication.run(HeroisStefaniniApplication.class, args);
 	}
