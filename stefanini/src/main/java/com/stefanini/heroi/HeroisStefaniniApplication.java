@@ -1,5 +1,9 @@
 package com.stefanini.heroi;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -9,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
 import com.stefanini.heroi.bo.Duelo;
+import com.stefanini.heroi.dto.PersonagemDto;
 
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
@@ -22,7 +27,8 @@ public class HeroisStefaniniApplication extends SpringBootServletInitializer imp
 
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
-		new Duelo().randomizarHerois();
+		Duelo duelo = new Duelo();
+		duelo.prepararPartida();
 		SpringApplication.run(HeroisStefaniniApplication.class, args);
 	}
 
