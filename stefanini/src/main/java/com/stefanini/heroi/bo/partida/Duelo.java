@@ -59,53 +59,74 @@ public class Duelo {
 		//iniciarPartida();
 	}*/
 	
-	protected void iniciarCombate() {
+	//retorna o heroi vencedor
+	protected Personagem iniciarCombate(Personagem heroi1, Personagem heroi2) throws NullPointerException {
 		switch(EnumPersonagemHabilidades.getRandomHabilidades(this.random)) {
 		case INTELIGENCIA:
 			System.out.println("Habilidade: Inteligência");
-			compararHabilidades(this.heroi1.getInteligencia(), this.heroi2.getInteligencia());
-			break;
+			return compararHabilidades(
+					heroi1.getInteligencia(), 
+					heroi2.getInteligencia(),
+					heroi1,
+					heroi2
+					);
 		case COMBATE:
 			System.out.println("Habilidade: Combate");
-			compararHabilidades(this.heroi1.getCombate(), this.heroi2.getCombate());
-			break;
+			return compararHabilidades(
+					heroi1.getCombate(), 
+					heroi2.getCombate(),
+					heroi1,
+					heroi2
+					);
 		case DEFESA:
 			System.out.println("Habilidade: Defesa");
-			compararHabilidades(this.heroi1.getDefesa(), this.heroi2.getDefesa());
-			break;
+			return compararHabilidades(
+					heroi1.getDefesa(), 
+					heroi2.getDefesa(),
+					heroi1,
+					heroi2);
 		case DESTREZA:
 			System.out.println("Habilidade: Destreza");
-			compararHabilidades(this.heroi1.getDestreza(), this.heroi2.getDestreza());
-			break;
+			return compararHabilidades(
+					heroi1.getDestreza(),
+					heroi2.getDestreza(),
+					heroi1,
+					heroi2);
 		case FORCA:
 			System.out.println("Habilidade: Força");
-			compararHabilidades(this.heroi1.getForca(), this.heroi2.getForca());
-			break;
+			return compararHabilidades(
+					heroi1.getForca(),
+					heroi2.getForca(),
+					heroi1,
+					heroi2);
 		case PODER:
 			System.out.println("Habilidade: Poder");
-			compararHabilidades(this.heroi1.getPoder(), this.heroi2.getPoder());
-			break;
+			return compararHabilidades(
+					heroi1.getPoder(),
+					heroi2.getPoder(),
+					heroi1,
+					heroi2);
 		}
+		return null;
 	}
 	
-	private void compararHabilidades(Integer heroi1Hab,Integer heroi2Hab) {
+	//retorna o heroi vencedor ou em caso de empate null
+	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,Personagem heroi1,Personagem heroi2) throws NullPointerException {
 		System.out.println("Pontos do heroi 1: " + heroi1Hab);
 		System.out.println("Pontos do heroi 2: " + heroi2Hab);
 		if(heroi1Hab.compareTo(heroi2Hab) == 0) {
-			this.habilidadeEscolhida();;
-			System.out.println("Empate");
-			this.heroiVencedor = null;
+			return null;
 		}
 		else if(heroi1Hab.compareTo(heroi2Hab) > 1) {
-			this.heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
-			this.heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
+			heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
+			heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 1 venceu a partida !!!");
-			this.heroiVencedor =  this.heroi1;
+			return heroi1;
 		}else {
-			this.heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
-			this.heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
+			heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
+			heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 2 venceu a partida !!!");
-			this.heroiVencedor =  this.heroi2;
+			return heroi2;
 			
 		}
 	}
