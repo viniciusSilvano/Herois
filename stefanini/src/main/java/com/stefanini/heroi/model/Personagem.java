@@ -1,5 +1,7 @@
 package com.stefanini.heroi.model;
 
+import com.stefanini.heroi.util.EnumPersonagemSituacao;
+
 /**
  * Classe que irá carregar todos os personagens
  * @author paulo
@@ -9,6 +11,7 @@ public class Personagem {
 
 	private String nome;
 	private String alinhamento;
+	private EnumPersonagemSituacao situacao;
 	private Integer inteligencia;
 	private Integer forca;
 	private Integer destreza;
@@ -64,6 +67,14 @@ public class Personagem {
 	public void setCombate(Integer combate) {
 		this.combate = combate;
 	}
+	
+	public EnumPersonagemSituacao getSituacao() {
+		return situacao;
+	}
+	public void setSituacao(EnumPersonagemSituacao situacao) {
+		this.situacao = situacao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

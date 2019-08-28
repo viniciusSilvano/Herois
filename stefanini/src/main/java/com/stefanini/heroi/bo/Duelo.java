@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
+import com.stefanini.heroi.util.EnumPersonagemHabilidades;
 
 @Component
 @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -40,14 +41,14 @@ public class Duelo {
 	}
 	
 	public void prepararPartida() {
-		diferenciarAlinhamento(randomizarHerois());
+		escolherHerois(randomizarHerois());
 	}
 	
 	private Personagem randomizarHerois() {
 		return this.herois.get(random.nextInt(herois.size()));
 	}
 	
-	private void diferenciarAlinhamento(Personagem heroi1) {
+	private void escolherHerois(Personagem heroi1) {
 		Personagem heroi2 = heroi1;
 		while(true) {
 			heroi2 = randomizarHerois();
@@ -59,6 +60,10 @@ public class Duelo {
 		}
 		System.out.println("Heroi 1: " + heroi1.getNome() + " Alinhamento: " + heroi1.getAlinhamento());
 		System.out.println("Heroi 2: " + heroi2.getNome() + " Alinhamento: " + heroi2.getAlinhamento());
+		
+	}
+	
+	private void randomizarHabilidade() {
 		
 	}
 }
