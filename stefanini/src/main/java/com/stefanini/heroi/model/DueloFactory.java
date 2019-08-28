@@ -8,7 +8,11 @@ import com.stefanini.heroi.bo.partida.Duelo;
 
 public class DueloFactory implements FactoryBean<Duelo> {
 	private static Random random = new Random();
+	private static DueloFactory instance = new DueloFactory();
 	
+	public static DueloFactory getInstance() {
+		return instance;
+	}
 	@Override
 	public Duelo getObject() throws Exception {
 		// TODO Auto-generated method stub

@@ -21,6 +21,7 @@ public class Duelo {
 	private Personagem heroi1;
 	private Personagem heroi2;
 	private int qntdPartidas = 0;
+	public String nome;
 	
 	
 	public Duelo(Random random) {
