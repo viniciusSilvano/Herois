@@ -68,6 +68,7 @@ public class Personagem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((alinhamento == null) ? 0 : alinhamento.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -80,6 +81,11 @@ public class Personagem {
 		if (getClass() != obj.getClass())
 			return false;
 		Personagem other = (Personagem) obj;
+		if (alinhamento == null) {
+			if (other.alinhamento != null)
+				return false;
+		} else if (!alinhamento.equals(other.alinhamento))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -87,6 +93,8 @@ public class Personagem {
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	

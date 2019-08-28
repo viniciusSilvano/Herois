@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -22,13 +21,13 @@ public class Duelo {
 	Partida partida;
 	
 	public Duelo(Random random, Partida partida) {
-		InicializarListaDeHerois();
+		this();
 		this.random = random;
 		this.partida = partida;
 	}
 	
 	public Duelo() {
-		
+		InicializarListaDeHerois();
 	}
 	
 	private void InicializarListaDeHerois() {
@@ -49,9 +48,17 @@ public class Duelo {
 	}
 	
 	private void diferenciarAlinhamento(Personagem heroi1) {
-		Personagem herois2 = heroi1;
-		while(heroi1.getAlinhamento() == herois2.getAlinhamento()) {
+		Personagem heroi2 = heroi1;
+		while(true) {
+			heroi2 = randomizarHerois();
+			if(heroi2.getAlinhamento() != heroi1.getAlinhamento()
+					&& heroi1 != heroi2) {
+				break;
+			}
 			
 		}
+		System.out.println("Heroi 1: " + heroi1.getNome() + " Alinhamento: " + heroi1.getAlinhamento());
+		System.out.println("Heroi 2: " + heroi2.getNome() + " Alinhamento: " + heroi2.getAlinhamento());
+		
 	}
 }
