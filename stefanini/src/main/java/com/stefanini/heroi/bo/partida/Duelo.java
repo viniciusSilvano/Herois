@@ -13,8 +13,6 @@ import com.stefanini.heroi.util.BancoMemoriaUtil;
 import com.stefanini.heroi.util.EnumPersonagemHabilidades;
 import com.stefanini.heroi.util.EnumPersonagemSituacao;
 
-@Component
-@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Duelo {
 	
 	private BancoMemoriaUtil bancoMemoriaUtil = BancoMemoriaUtil.getInstance();
@@ -26,14 +24,9 @@ public class Duelo {
 	
 	
 	public Duelo(Random random) {
-		this();
 		this.random = random;
 	}
-	
-	public Duelo() {
-		InicializarListaDeHerois();
-	}
-	
+		
 	private void InicializarListaDeHerois() {
 		try {
 			this.herois = bancoMemoriaUtil.carregaPersonagens();
@@ -44,7 +37,8 @@ public class Duelo {
 	}
 	
 	public void prepararPartida() {
-		//escolherHerois(randomizarHerois());
+		InicializarListaDeHerois();
+		escolherHerois(randomizarHerois());
 	}
 	
 	private Personagem randomizarHerois() {
@@ -69,19 +63,17 @@ public class Duelo {
 	}
 	
 	private void iniciarPartida() {
-		while(this.qntdPartidas < 10) {
-			System.out.println("---------------------------------------------------");
-			System.out.println("Partida " + (qntdPartidas + 1) + " começando!!!!!");
-			System.out.println("---------------------------------------------------");
-			//habilidadeEscolhida();
-		}
+		System.out.println("---------------------------------------------------");
+		System.out.println("Partida " + (qntdPartidas + 1) + " começando!!!!!");
+		System.out.println("---------------------------------------------------");
+		habilidadeEscolhida();
 	}
 	
 	private void habilidadeEscolhida() {
 		switch(EnumPersonagemHabilidades.getRandomHabilidades(this.random)) {
 		case INTELIGENCIA:
 			System.out.println("Habilidade: Inteligência");
-			//compararHabilidades(this.heroi1.getInteligencia(), this.heroi2.getInteligencia());
+			compararHabilidades(this.heroi1.getInteligencia(), this.heroi2.getInteligencia());
 			break;
 		case COMBATE:
 			System.out.println("Habilidade: Combate");
@@ -106,26 +98,25 @@ public class Duelo {
 		}
 	}
 	
-	private void compararHabilidades(Integer heroi1Hab,Integer heroi2Hab) {
+	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab) {
 		System.out.println("Pontos do heroi 1: " + heroi1Hab);
 		System.out.println("Pontos do heroi 2: " + heroi2Hab);
 		if(heroi1Hab.compareTo(heroi2Hab) == 0) {
-			this.iniciarPartida();
+			this.habilidadeEscolhida();;
 			System.out.println("Empate");
+			return null;
 		}
 		else if(heroi1Hab.compareTo(heroi2Hab) < 1) {
 			this.heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			this.heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 1 venceu a partida !!!");
-			//this.escolherHerois(heroi1);
-			this.qntdPartidas++;
+			return this.heroi1;
 		}else {
 			this.heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			this.heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 2 venceu a partida !!!");
-			this.heroi1 = heroi2;
-			//this.escolherHerois(this.heroi1);
-			this.qntdPartidas++;
+			return this.heroi2;
+			
 		}
 	}
 	
