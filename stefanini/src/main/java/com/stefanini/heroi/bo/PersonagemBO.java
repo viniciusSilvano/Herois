@@ -3,7 +3,7 @@ package com.stefanini.heroi.bo;
 import java.io.IOException;
 import java.util.List;
 
-import com.stefanini.heroi.dto.PersonagemDto;
+import com.stefanini.heroi.dto.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 
 /**
@@ -19,7 +19,7 @@ public class PersonagemBO {
 	 * @return
 	 * @throws IOException
 	 */
-	public List<PersonagemDto> carregarPersonagem() throws IOException{
+	public List<Personagem> carregarPersonagem() throws IOException{
 		return BancoMemoriaUtil.getInstance().carregaPersonagens();
 	}
 	

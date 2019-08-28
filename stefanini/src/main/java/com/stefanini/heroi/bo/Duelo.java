@@ -9,7 +9,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.stefanini.heroi.dto.PersonagemDto;
+import com.stefanini.heroi.dto.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 
 @Component
@@ -17,7 +17,7 @@ import com.stefanini.heroi.util.BancoMemoriaUtil;
 public class Duelo {
 	
 	private BancoMemoriaUtil bancoMemoriaUtil = BancoMemoriaUtil.getInstance();
-	private List<PersonagemDto> herois;
+	private List<Personagem> herois;
 	private Random random;
 	Partida partida;
 	
@@ -44,12 +44,12 @@ public class Duelo {
 		diferenciarAlinhamento(randomizarHerois());
 	}
 	
-	private PersonagemDto randomizarHerois() {
+	private Personagem randomizarHerois() {
 		return this.herois.get(random.nextInt(herois.size()));
 	}
 	
-	private void diferenciarAlinhamento(PersonagemDto heroi1) {
-		PersonagemDto herois2 = heroi1;
+	private void diferenciarAlinhamento(Personagem heroi1) {
+		Personagem herois2 = heroi1;
 		while(heroi1.getAlinhamento() == herois2.getAlinhamento()) {
 			
 		}

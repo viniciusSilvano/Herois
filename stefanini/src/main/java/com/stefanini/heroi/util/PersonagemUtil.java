@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.stefanini.heroi.dto.PersonagemDto;
+import com.stefanini.heroi.dto.Personagem;
 
 public class PersonagemUtil {
 	
@@ -20,15 +20,15 @@ public class PersonagemUtil {
 		
 	}
 	
-	public List<PersonagemDto> carregaCSV() throws IOException{
-		List<PersonagemDto> personagemDtos = new ArrayList<PersonagemDto>();
+	public List<Personagem> carregaCSV() throws IOException{
+		List<Personagem> personagemDtos = new ArrayList<Personagem>();
 		Reader reader = Files.newBufferedReader(Paths.get(arquivo));
 		CSVReader leitor = new CSVReaderBuilder(reader).withSkipLines(1).build();
 		List<String[]> csv = leitor.readAll();
 		Integer count = 0;
 		
 		for (String[] linhas : csv){
-			PersonagemDto personagemDto = new PersonagemDto();
+			Personagem personagemDto = new Personagem();
 	        for (String coluna : linhas){
 	        	if(count == 0)
 	        		personagemDto.setNome(coluna);

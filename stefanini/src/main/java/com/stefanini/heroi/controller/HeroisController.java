@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stefanini.heroi.bo.PersonagemBO;
-import com.stefanini.heroi.dto.PersonagemDto;
+import com.stefanini.heroi.dto.Personagem;
 import com.stefanini.heroi.dto.PoderesDto;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 
@@ -27,7 +27,7 @@ public class HeroisController {
 	private PersonagemBO personagemBo = new PersonagemBO();
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<PersonagemDto> carregaHeroi() throws IOException {
+	public List<Personagem> carregaHeroi() throws IOException {
 		return personagemBo.carregarPersonagem();
 	}
 	

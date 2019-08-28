@@ -5,7 +5,7 @@ package com.stefanini.heroi.dto;
  * @author paulo
  *
  */
-public class PersonagemDto {
+public class Personagem {
 
 	private String nome;
 	private String alinhamento;
@@ -79,7 +79,7 @@ public class PersonagemDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PersonagemDto other = (PersonagemDto) obj;
+		Personagem other = (Personagem) obj;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
