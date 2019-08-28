@@ -13,8 +13,6 @@ import com.stefanini.heroi.dto.HeroisDto;
 import com.stefanini.heroi.dto.PersonagemDto;
 import com.stefanini.heroi.dto.PoderesDto;
 
-@Component
-@Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class BancoMemoriaUtil {
 	
 	public static List<PoderesDto> poderesDtos;
