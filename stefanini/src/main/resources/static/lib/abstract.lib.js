@@ -12,6 +12,10 @@ stefanini.controller('abstractController', ['$scope', '$state',
 	    $state.go('herois', {});
 	  };
 	  
+	  $scope.duelar = function(){
+		$state.go('duelar',{});  
+	  };
+	  
 }]).directive('menu', function() {
   return {
   	restrict: 'E',

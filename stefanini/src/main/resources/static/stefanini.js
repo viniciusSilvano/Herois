@@ -18,7 +18,10 @@ stefanini.config(['$stateProvider', '$urlRouterProvider', '$routeProvider', func
 	   url: '/poderes',
 	   templateUrl : 'pages/heroi/poderes.html',
 	   controller : 'cadastraPoderController',
+	}).state('duelar', {
+		url:'/duelar',
+		templateUrl: 'pages/heroi/duelo.html',
+		controller: 'dueloController',
 	});
-	
    $urlRouterProvider.otherwise('/');
 }]);
