@@ -10,9 +10,10 @@ public class DueloFactory implements FactoryBean<IDuelo> {
 	private static Random random = new Random();
 	private static DueloFactory instance;
 	
-	private DueloFactory() {
+	public DueloFactory() {
 		
 	}
+	
 	public static DueloFactory getInstance() {
 		if(instance == null) {
 			instance = new DueloFactory();

@@ -9,7 +9,7 @@ public class PersonagemFactory implements FactoryBean<IPersonagem> {
 	
 	private static PersonagemFactory personagemFactory;
 	
-	private PersonagemFactory() {
+	public PersonagemFactory() {
 		
 	}
 	
