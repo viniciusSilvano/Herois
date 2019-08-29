@@ -1,11 +1,8 @@
-package com.stefanini.heroi.model;
+package com.stefanini.heroi.bo.partida;
 
 import java.util.Random;
 
 import org.springframework.beans.factory.FactoryBean;
-
-import com.stefanini.heroi.bo.partida.Duelo;
-import com.stefanini.heroi.bo.partida.IDuelo;
 
 public class DueloFactory implements FactoryBean<IDuelo> {
 	private static Random random = new Random();

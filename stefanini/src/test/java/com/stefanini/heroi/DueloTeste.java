@@ -6,14 +6,14 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.stefanini.heroi.bo.partida.DueloFactory;
 import com.stefanini.heroi.bo.partida.IDuelo;
-import com.stefanini.heroi.config.FactoryBeanConfig;
-import com.stefanini.heroi.model.DueloFactory;
+import com.stefanini.heroi.config.BeanConfig;
 
 import junit.framework.TestCase;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {FactoryBeanConfig.class})
+@ContextConfiguration(classes = {BeanConfig.class})
 public class DueloTeste extends TestCase {
 	DueloFactory dueloFactory = DueloFactory.getInstance();
 	

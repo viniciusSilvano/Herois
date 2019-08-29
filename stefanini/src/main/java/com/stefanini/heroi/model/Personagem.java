@@ -103,10 +103,5 @@ public class Personagem {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}
-	
-	
-	
-	
-	
+	}	
 }

@@ -45,19 +45,6 @@ public class Duelo  implements IDuelo{
 		return false;
 	}
 	
-	/*private void escolherHerois(Personagem heroi1) {
-		this.heroi1 = heroi1;
-		this.heroi2 = heroi1;
-		boolean condicao = true;
-		while(condicao) {
-			this.heroi2 = randomizarHerois();
-			
-			
-		}
-		System.out.println("Heroi 1: " + this.heroi1.getNome() + " Alinhamento: " + this.heroi1.getAlinhamento());
-		System.out.println("Heroi 2: " + this.heroi2.getNome() + " Alinhamento: " + this.heroi2.getAlinhamento());
-		//iniciarPartida();
-	}*/
 	
 	//retorna o heroi vencedor
 	protected Personagem iniciarCombate(Personagem heroi1, Personagem heroi2) throws NullPointerException {

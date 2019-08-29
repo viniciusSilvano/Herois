@@ -4,7 +4,6 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.stefanini.heroi.model.DueloFactory;
 import com.stefanini.heroi.model.Personagem;
 
 //@Component
@@ -38,7 +37,6 @@ public class Partida {
 						heroi2 = duelo.randomizarHerois();
 					}
 					
-					System.out.println();
 					System.out.println("Heroi 1: " + heroi1.getNome());
 					System.out.println("Heroi 2: " + heroi2.getNome());
 					System.out.println();
