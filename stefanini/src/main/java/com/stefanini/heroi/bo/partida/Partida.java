@@ -3,17 +3,22 @@ package com.stefanini.heroi.bo.partida;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.stefanini.heroi.bo.partida.factory.DueloFactory;
 import com.stefanini.heroi.model.Personagem;
 
-//@Component
-//@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Component
+@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Partida {
 	private DueloFactory dueloFactory = DueloFactory.getInstance();
 	private List<Placar> placares = new ArrayList<Placar>();
+	
+	@Autowired
+	private static Personagem MUTANTE;
 	
 	public Partida(){
 		
@@ -56,7 +61,7 @@ public class Partida {
 					while(!duelo.validarHerois(heroi1, heroi2)) {
 						heroi2 = duelo.randomizarHerois();
 					}
-					
+					System.out.println();
 					System.out.println("Heroi 1: " + heroi1.getNome());
 					System.out.println("Heroi 2: " + heroi2.getNome());
 					System.out.println();
@@ -75,6 +80,8 @@ public class Partida {
 					counter++;
 				}
 				this.setPlacares(duelo.getPlacares());
+				this.criarMutante();
+				
 		}catch(NullPointerException e) {
 			e.printStackTrace();
 		}catch (Exception e) {
@@ -83,4 +90,11 @@ public class Partida {
 		}
 		
 	}
+	
+	private void criarMutante() {
+		if(MUTANTE == null) {
+			System.out.println("Mutante null");
+		}
+	}
+	
 }

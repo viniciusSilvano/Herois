@@ -1,6 +1,11 @@
 package com.stefanini.heroi.model;
 
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.util.EnumPersonagemSituacao;
 
 /**
@@ -8,7 +13,9 @@ import com.stefanini.heroi.util.EnumPersonagemSituacao;
  * @author paulo
  *
  */
-public class Personagem {
+@Component
+@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class Personagem implements IPersonagem {
 
 	private String nome;
 	private String alinhamento;
@@ -20,6 +27,23 @@ public class Personagem {
 	private Integer combate;
 	private Integer defesa;
 	private Integer vitorias;
+	
+	public Personagem() {
+		super();
+	}
+	
+	public Personagem(String nome, String alinhamento, Integer inteligencia,
+			Integer forca, Integer destreza, Integer poder, Integer combate, Integer defesa) {
+		super();
+		this.nome = nome;
+		this.alinhamento = alinhamento;
+		this.inteligencia = inteligencia;
+		this.forca = forca;
+		this.destreza = destreza;
+		this.poder = poder;
+		this.combate = combate;
+		this.defesa = defesa;
+	}
 	
 	public Integer getDefesa() {
 		return defesa;

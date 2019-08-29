@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.stefanini.heroi.bo.partida.DueloFactory;
-import com.stefanini.heroi.bo.partida.IDuelo;
+import com.stefanini.heroi.bo.partida.factory.DueloFactory;
+import com.stefanini.heroi.bo.partida.factory.IDuelo;
 import com.stefanini.heroi.config.BeanConfig;
 
 import junit.framework.TestCase;

@@ -1,15 +1,20 @@
 package com.stefanini.heroi.bo.partida;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.stereotype.Component;
+
+import com.stefanini.heroi.bo.partida.factory.IDuelo;
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 import com.stefanini.heroi.util.EnumPersonagemHabilidades;
 import com.stefanini.heroi.util.EnumPersonagemSituacao;
 
+@Component
 public class Duelo  implements IDuelo{
 	
 	private List<Personagem> herois;

@@ -3,16 +3,17 @@ package com.stefanini.heroi.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.stefanini.heroi.bo.partida.Duelo;
-import com.stefanini.heroi.bo.partida.DueloFactory;
-import com.stefanini.heroi.bo.partida.IDuelo;
 import com.stefanini.heroi.bo.partida.Partida;
+import com.stefanini.heroi.bo.partida.factory.DueloFactory;
+import com.stefanini.heroi.bo.partida.factory.IDuelo;
+import com.stefanini.heroi.model.factory.IPersonagem;
+import com.stefanini.heroi.model.factory.PersonagemFactory;
 
 @Configuration
 public class BeanConfig { 
 	    @Bean(name = "duelo")
 	    public DueloFactory dueloFactory() {
-	        DueloFactory factory = new DueloFactory();
+	        DueloFactory factory = DueloFactory.getInstance();
 	        return factory;
 	    }
 	 
@@ -22,8 +23,18 @@ public class BeanConfig {
 	    }
 	    
 	    @Bean
-	    public Partida partida() throws Exception{
+	    public Partida partida(){
 	    	return new Partida();
+	    }
+	    
+	    @Bean
+	    public PersonagemFactory personagemFactory() {
+	    	return PersonagemFactory.getInstace();
+	    }
+	    
+	    @Bean
+	    public IPersonagem iPersonagem() throws Exception {
+	    	return personagemFactory().getObject();
 	    }
 }
 
