@@ -114,12 +114,12 @@ public class Partida {
 			
 			System.out.println();
 			System.out.println("-----------------------------------------------------");
-			System.out.println("COLOCAÇÕES");
+			System.out.println("COLOCAÇÕES PRINCIPAIS");
 			System.out.println("-----------------------------------------------------");
-			System.out.println();
 			System.out.println("Primeiro lugar:" + primeiroLugar);
 			System.out.println();
 			System.out.println("Segundo lugar:" + segundoLugar);
+			
 		}catch(NullPointerException e) {
 			e.printStackTrace();
 		}catch(NoSuchElementException e) {
