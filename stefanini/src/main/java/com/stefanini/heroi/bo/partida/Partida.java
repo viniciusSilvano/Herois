@@ -1,7 +1,11 @@
 package com.stefanini.heroi.bo.partida;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -10,15 +14,19 @@ import org.springframework.stereotype.Component;
 
 import com.stefanini.heroi.bo.partida.factory.DueloFactory;
 import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.PersonagemFactory;
+import com.stefanini.heroi.util.PersonagemUtil;
 
 @Component
 @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Partida {
 	private DueloFactory dueloFactory = DueloFactory.getInstance();
+	private PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
 	private List<Placar> placares = new ArrayList<Placar>();
 	
-	@Autowired
 	private static Personagem MUTANTE;
+	private Personagem primeiroLugar;
+	private Personagem segundoLugar;
 	
 	public Partida(){
 		
@@ -73,6 +81,7 @@ public class Partida {
 						if(tentativasDeDesempate > 3) {
 							heroi2 = duelo.randomizarHerois();
 						}
+						tentativasDeDesempate++;
 					}
 					heroi1 = vencedor;
 					heroi2 = duelo.randomizarHerois();
@@ -80,6 +89,7 @@ public class Partida {
 					counter++;
 				}
 				this.setPlacares(duelo.getPlacares());
+				this.definirSegundoEPrimerioLugar();
 				this.criarMutante();
 				
 		}catch(NullPointerException e) {
@@ -90,11 +100,61 @@ public class Partida {
 		}
 		
 	}
-	
-	private void criarMutante() {
-		if(MUTANTE == null) {
-			System.out.println("Mutante null");
+	private void definirSegundoEPrimerioLugar() {
+		try {	
+			List<Personagem> personagensVencedores = placares.stream().map(Placar::getVencedor)
+					.collect(Collectors.toList());
+					
+			this.primeiroLugar = personagensVencedores.stream()
+					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias())).get();
+					
+			this.segundoLugar = personagensVencedores.stream()
+					.filter(x -> !x.equals(primeiroLugar))
+					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias())).get();
+			
+			System.out.println();
+			System.out.println("-----------------------------------------------------");
+			System.out.println("COLOCAÇÕES");
+			System.out.println("-----------------------------------------------------");
+			System.out.println();
+			System.out.println("Primeiro lugar:" + primeiroLugar);
+			System.out.println();
+			System.out.println("Segundo lugar:" + segundoLugar);
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}catch(NoSuchElementException e) {
+			e.printStackTrace();
+		}catch(IndexOutOfBoundsException e) {
+			e.printStackTrace();
 		}
+	}
+	private void criarMutante() {
+		try {
+			MUTANTE = (Personagem) personagemFactory.getObject();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		MUTANTE.setNome("O Mutante");
+		MUTANTE.setCombate(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+				primeiroLugar.getCombate() ,segundoLugar.getCombate()).getCombate());
+		
+		MUTANTE.setDefesa(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+				primeiroLugar.getDefesa() ,segundoLugar.getDefesa()).getDefesa());
+		
+		MUTANTE.setDestreza(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+				primeiroLugar.getDestreza() ,segundoLugar.getDestreza()).getDestreza());
+		
+		MUTANTE.setForca(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+				primeiroLugar.getForca() ,segundoLugar.getForca()).getForca());
+		
+		MUTANTE.setInteligencia(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+				primeiroLugar.getInteligencia() ,segundoLugar.getInteligencia()).getInteligencia());
+		
+		MUTANTE.setPoder(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+				primeiroLugar.getPoder() ,segundoLugar.getPoder()).getPoder());
+		
+		System.out.println("Mutante criado: " + MUTANTE);
 	}
 	
 }

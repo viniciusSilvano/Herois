@@ -26,7 +26,7 @@ public class Personagem implements IPersonagem {
 	private Integer poder;
 	private Integer combate;
 	private Integer defesa;
-	private Integer vitorias;
+	private Integer vitorias = new Integer(0);
 	
 	public Personagem() {
 		super();
@@ -111,6 +111,8 @@ public class Personagem implements IPersonagem {
 	public void setVitorias(Integer vitorias) {
 		this.vitorias = vitorias;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,5 +141,14 @@ public class Personagem implements IPersonagem {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Personagem [nome=" + nome + ", alinhamento=" + alinhamento + ", situacao=" + situacao
+				+ ", inteligencia=" + inteligencia + ", forca=" + forca + ", destreza=" + destreza + ", poder=" + poder
+				+ ", combate=" + combate + ", defesa=" + defesa + ", vitorias=" + vitorias + "]";
 	}	
+	
+	
 }

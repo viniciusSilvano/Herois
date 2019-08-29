@@ -56,6 +56,9 @@ public class Duelo  implements IDuelo{
 		return false;
 	}
 	
+	private void ModificarAtributos(Personagem heroi1,Personagem heroi2) {
+		
+	}
 	
 	//retorna o heroi vencedor
 	protected Personagem iniciarCombate(Personagem heroi1, Personagem heroi2) throws NullPointerException {
@@ -191,25 +194,30 @@ public class Duelo  implements IDuelo{
 			Personagem heroi1,Personagem heroi2, EnumPersonagemHabilidades habilidadeEscolhida) throws NullPointerException {
 		System.out.println("Pontos do heroi 1: " + heroi1Hab);
 		System.out.println("Pontos do heroi 2: " + heroi2Hab);
-		if(heroi1Hab.intValue() == heroi2Hab.intValue()) {
-			System.out.println("Empate");
-			heroi1.setSituacao(EnumPersonagemSituacao.INDIFERENTE);
-			heroi2.setSituacao(EnumPersonagemSituacao.INDIFERENTE);
-			return null;
+		int resultado = heroi1Hab.compareTo(heroi2Hab);
+		switch(resultado) {
+			case 0:
+				System.out.println("Empate");
+				heroi1.setSituacao(EnumPersonagemSituacao.INDIFERENTE);
+				heroi2.setSituacao(EnumPersonagemSituacao.INDIFERENTE);
+				return null;
+			case 1:
+				heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
+				heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
+				System.out.println("Heroi 1 venceu a partida !!!");
+				heroi1.setVitorias(heroi1.getVitorias().intValue() + 1);
+				placares.add(new Placar(heroi1,heroi2,heroi1Hab,heroi2Hab,habilidadeEscolhida));
+				return heroi1;
+			case -1:
+				heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
+				heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
+				System.out.println("Heroi 2 venceu a partida !!!");
+				heroi2.setVitorias(heroi2.getVitorias().intValue() + 1);
+				placares.add(new Placar(heroi2,heroi1,heroi2Hab,heroi1Hab,habilidadeEscolhida));
+				return heroi2;
+			default:
+				return null;
 		}
-		else if(heroi1Hab.intValue() > heroi2Hab.intValue() ) {
-			heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
-			heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
-			System.out.println("Heroi 1 venceu a partida !!!");
-			placares.add(new Placar(heroi1,heroi2,heroi1Hab,heroi2Hab,habilidadeEscolhida));
-			return heroi1;
-		}else {
-			heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
-			heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
-			System.out.println("Heroi 2 venceu a partida !!!");
-			placares.add(new Placar(heroi2,heroi1,heroi2Hab,heroi1Hab,habilidadeEscolhida));
-			return heroi2;
-			
-		}
+		
 	}	
 }
