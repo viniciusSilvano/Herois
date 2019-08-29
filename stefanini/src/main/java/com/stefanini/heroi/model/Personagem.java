@@ -1,5 +1,6 @@
 package com.stefanini.heroi.model;
 
+
 import com.stefanini.heroi.util.EnumPersonagemSituacao;
 
 /**
@@ -66,6 +67,10 @@ public class Personagem {
 	}
 	public void setCombate(Integer combate) {
 		this.combate = combate;
+	}
+	
+	public boolean isVencedor() {
+		return this.situacao.equals(EnumPersonagemSituacao.VENCEDOR);
 	}
 	
 	public EnumPersonagemSituacao getSituacao() {
