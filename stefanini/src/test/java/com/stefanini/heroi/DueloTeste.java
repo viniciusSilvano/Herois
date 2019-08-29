@@ -1,14 +1,12 @@
 package com.stefanini.heroi;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.stefanini.heroi.bo.partida.Duelo;
+import com.stefanini.heroi.bo.partida.IDuelo;
 import com.stefanini.heroi.config.FactoryBeanConfig;
 import com.stefanini.heroi.model.DueloFactory;
 
@@ -22,8 +20,8 @@ public class DueloTeste extends TestCase {
 	
 	@Test
 	public void noSingletonTest() {
-		Duelo duelo1 = null;
-		Duelo duelo2 = null;
+		IDuelo duelo1 = null;
+		IDuelo duelo2 = null;
 		try {
 			duelo1 = dueloFactory.getObject();
 			duelo2 = dueloFactory.getObject();

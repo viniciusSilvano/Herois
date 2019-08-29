@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.stefanini.heroi.bo.partida.Duelo;
+import com.stefanini.heroi.bo.partida.IDuelo;
 import com.stefanini.heroi.model.DueloFactory;
 
 @Configuration
@@ -15,7 +16,7 @@ public class FactoryBeanConfig {
 	    }
 	 
 	    @Bean
-	    public Duelo duelo() throws Exception {
+	    public IDuelo duelo() throws Exception {
 	        return dueloFactory().getObject();
 	    }
 }

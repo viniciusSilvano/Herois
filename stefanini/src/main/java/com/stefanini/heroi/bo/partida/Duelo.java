@@ -4,27 +4,27 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 import com.stefanini.heroi.util.EnumPersonagemHabilidades;
 import com.stefanini.heroi.util.EnumPersonagemSituacao;
 
-public class Duelo {
+public class Duelo  implements IDuelo{
 	
-	private BancoMemoriaUtil bancoMemoriaUtil = BancoMemoriaUtil.getInstance();
 	private List<Personagem> herois;
 	private Random random;
 	
+	public Duelo() {
+		
+	}
 	public Duelo(Random random) {
 		this.random = random;
+		this.InicializarListaDeHerois();
 	}
 		
-	protected void InicializarListaDeHerois() {
+	private void InicializarListaDeHerois() {
 		try {
+			BancoMemoriaUtil bancoMemoriaUtil = BancoMemoriaUtil.getInstance();
 			this.herois = bancoMemoriaUtil.carregaPersonagens();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -114,10 +114,10 @@ public class Duelo {
 	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,Personagem heroi1,Personagem heroi2) throws NullPointerException {
 		System.out.println("Pontos do heroi 1: " + heroi1Hab);
 		System.out.println("Pontos do heroi 2: " + heroi2Hab);
-		if(heroi1Hab.compareTo(heroi2Hab) == 0) {
+		if(heroi1Hab == heroi2Hab) {
 			return null;
 		}
-		else if(heroi1Hab.compareTo(heroi2Hab) > 1) {
+		else if(heroi1Hab > heroi2Hab ) {
 			heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 1 venceu a partida !!!");

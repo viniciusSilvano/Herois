@@ -29,7 +29,7 @@ public class HeroisStefaniniApplication extends SpringBootServletInitializer imp
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
 		Partida partida = new Partida();
-		partida.IniciarPartidas(2);
+		partida.IniciarPartidas(10);
 		SpringApplication.run(HeroisStefaniniApplication.class, args);
 	}
 
