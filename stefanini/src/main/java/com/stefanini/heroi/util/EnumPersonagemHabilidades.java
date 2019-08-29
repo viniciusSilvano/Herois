@@ -5,23 +5,90 @@ import java.util.Random;
 import com.stefanini.heroi.model.Personagem;
 
 public enum EnumPersonagemHabilidades implements IAtributo {
-	INTELIGENCIA,FORCA,DESTREZA, PODER, COMBATE,DEFESA;
+	INTELIGENCIA{
+		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+			if(vencedor != null) {
+				if(vencedor == heroi1) {
+					heroi1.setInteligencia(heroi1.getInteligencia() + 2);
+					heroi2.setInteligencia(heroi2.getInteligencia() - 2);
+					System.out.println();
+				}else {
+					heroi1.setInteligencia(heroi1.getInteligencia() - 2);
+					heroi2.setInteligencia(heroi2.getInteligencia() + 2);
+				}
+				System.out.println("Novo ponto do vencedor: " + vencedor.getNome() + " agora possui:" + vencedor.getInteligencia());
+			}
+		}
+	},
+	FORCA{
+		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+			if(vencedor != null) {
+				if(vencedor == heroi1) {
+					heroi1.setForca(heroi1.getForca() + 2);
+					heroi2.setForca(heroi2.getForca() - 2);
+				}else {
+					heroi1.setForca(heroi1.getForca() - 2);
+					heroi2.setForca(heroi2.getForca() + 2);
+				}
+				System.out.println("Novo ponto do vencedor: " + vencedor.getNome() + " agora possui:" + vencedor.getForca());
+			}
+		}
+	},DESTREZA{
+		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+			if(vencedor != null) {
+				if(vencedor == heroi1) {
+					heroi1.setDestreza(heroi1.getDestreza() + 2);
+					heroi2.setDestreza(heroi2.getDestreza() - 2);
+				}else {
+					heroi1.setDestreza(heroi1.getDestreza() - 2);
+					heroi2.setDestreza(heroi2.getDestreza() + 2);
+				}
+				System.out.println("Novo ponto do vencedor: " + vencedor.getNome() + " agora possui:" + vencedor.getDestreza());
+			}
+		}
+	}, PODER{
+		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+			if(vencedor != null) {
+				if(vencedor == heroi1) {
+					heroi1.setPoder(heroi1.getPoder() + 2);
+					heroi2.setPoder(heroi2.getPoder() - 2);
+				}else {
+					heroi1.setPoder(heroi1.getPoder() - 2);
+					heroi2.setPoder(heroi2.getPoder() + 2);
+				}
+				System.out.println("Novo ponto do vencedor: " + vencedor.getNome() + " agora possui:" + vencedor.getPoder());
+			}
+		}
+	}, COMBATE{
+		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+			if(vencedor != null) {
+				if(vencedor == heroi1) {
+					heroi1.setCombate(heroi1.getCombate() + 2);
+					heroi2.setCombate(heroi2.getCombate() - 2);
+				}else {
+					heroi1.setCombate(heroi1.getCombate() - 2);
+					heroi2.setCombate(heroi2.getCombate() + 2);
+				}
+				System.out.println("Novo ponto do vencedor: " + vencedor.getNome() + " agora possui:" + vencedor.getCombate());
+			}
+		}
+	},DEFESA{
+		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+			if(vencedor != null) {
+				if(vencedor == heroi1) {
+					heroi1.setDefesa(heroi1.getDefesa() + 2);
+					heroi2.setDefesa(heroi2.getDefesa() - 2);
+				}else {
+					heroi1.setDefesa(heroi1.getDefesa() - 2);
+					heroi2.setDefesa(heroi2.getDefesa() + 2);
+				}
+				System.out.println("Novo ponto do vencedor: " + vencedor.getNome() + " agora possui:" + vencedor.getDefesa());
+			}
+		}
+	};
 	
 	 public static EnumPersonagemHabilidades getRandomHabilidades(Random random) {
         return values()[random.nextInt(values().length)];
     }
 
-	@Override
-	public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor) {
-		if(vencedor != null) {
-			if(vencedor == heroi1) {
-				heroi1.setPoder(heroi1.getPoder() + 2);
-				heroi2.setPoder(heroi2.getPoder() - 2);
-			}else {
-				heroi1.setPoder(heroi1.getPoder() - 2);
-				heroi2.setPoder(heroi2.getPoder() + 2);
-			}
-			System.out.println("Novo ponto do vencedor: " + vencedor.getNome() + " agora possui:" + vencedor.getPoder());
-		}		
-	}
 }
