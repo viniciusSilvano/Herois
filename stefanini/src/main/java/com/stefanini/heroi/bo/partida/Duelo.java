@@ -73,17 +73,7 @@ public class Duelo  implements IDuelo{
 					heroi2,
 					EnumPersonagemHabilidades.INTELIGENCIA
 					);
-			if(resultado != null) {
-				if(resultado == heroi1) {
-					heroi1.setInteligencia(heroi1.getInteligencia() + 2);
-					heroi2.setInteligencia(heroi2.getInteligencia() - 2);
-					System.out.println();
-				}else {
-					heroi1.setInteligencia(heroi1.getInteligencia() - 2);
-					heroi2.setInteligencia(heroi2.getInteligencia() + 2);
-				}
-				System.out.println("Novo ponto do vencedor: " + resultado.getNome() + " agora possui:" + resultado.getInteligencia());
-			}
+			EnumPersonagemHabilidades.INTELIGENCIA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case COMBATE:
 			System.out.println("Habilidade: Combate");
@@ -94,16 +84,7 @@ public class Duelo  implements IDuelo{
 					heroi2,
 					EnumPersonagemHabilidades.COMBATE
 					);
-			if(resultado != null) {
-				if(resultado == heroi1) {
-					heroi1.setCombate(heroi1.getCombate() + 2);
-					heroi2.setCombate(heroi2.getCombate() - 2);
-				}else {
-					heroi1.setCombate(heroi1.getCombate() - 2);
-					heroi2.setCombate(heroi2.getCombate() + 2);
-				}
-				System.out.println("Novo ponto do vencedor: " + resultado.getNome() + " agora possui:" + resultado.getCombate());
-			}
+			EnumPersonagemHabilidades.COMBATE.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case DEFESA:
 			System.out.println("Habilidade: Defesa");
@@ -114,16 +95,7 @@ public class Duelo  implements IDuelo{
 					heroi2,
 					EnumPersonagemHabilidades.DEFESA
 					);
-			if(resultado != null) {
-				if(resultado == heroi1) {
-					heroi1.setDefesa(heroi1.getDefesa() + 2);
-					heroi2.setDefesa(heroi2.getDefesa() - 2);
-				}else {
-					heroi1.setDefesa(heroi1.getDefesa() - 2);
-					heroi2.setDefesa(heroi2.getDefesa() + 2);
-				}
-				System.out.println("Novo ponto do vencedor: " + resultado.getNome() + " agora possui:" + resultado.getDefesa());
-			}
+			EnumPersonagemHabilidades.DEFESA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case DESTREZA:
 			System.out.println("Habilidade: Destreza");
@@ -134,16 +106,7 @@ public class Duelo  implements IDuelo{
 					heroi2,
 					EnumPersonagemHabilidades.DESTREZA
 					);
-			if(resultado != null) {
-				if(resultado == heroi1) {
-					heroi1.setDestreza(heroi1.getDestreza() + 2);
-					heroi2.setDestreza(heroi2.getDestreza() - 2);
-				}else {
-					heroi1.setDestreza(heroi1.getDestreza() - 2);
-					heroi2.setDestreza(heroi2.getDestreza() + 2);
-				}
-				System.out.println("Novo ponto do vencedor: " + resultado.getNome() + " agora possui:" + resultado.getDestreza());
-			}
+			EnumPersonagemHabilidades.DESTREZA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case FORCA:
 			System.out.println("Habilidade: Força");
@@ -154,16 +117,7 @@ public class Duelo  implements IDuelo{
 					heroi2,
 					EnumPersonagemHabilidades.FORCA
 					);
-			if(resultado != null) {
-				if(resultado == heroi1) {
-					heroi1.setForca(heroi1.getForca() + 2);
-					heroi2.setForca(heroi2.getForca() - 2);
-				}else {
-					heroi1.setForca(heroi1.getForca() - 2);
-					heroi2.setForca(heroi2.getForca() + 2);
-				}
-				System.out.println("Novo ponto do vencedor: " + resultado.getNome() + " agora possui:" + resultado.getForca());
-			}
+			EnumPersonagemHabilidades.FORCA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case PODER:
 			System.out.println("Habilidade: Poder");
@@ -174,16 +128,7 @@ public class Duelo  implements IDuelo{
 					heroi2,
 					EnumPersonagemHabilidades.PODER
 					);
-			if(resultado != null) {
-				if(resultado == heroi1) {
-					heroi1.setPoder(heroi1.getPoder() + 2);
-					heroi2.setPoder(heroi2.getPoder() - 2);
-				}else {
-					heroi1.setPoder(heroi1.getPoder() - 2);
-					heroi2.setPoder(heroi2.getPoder() + 2);
-				}
-				System.out.println("Novo ponto do vencedor: " + resultado.getNome() + " agora possui:" + resultado.getPoder());
-			}
+			EnumPersonagemHabilidades.PODER.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		}
 		return null;
