@@ -101,10 +101,11 @@ public class Duelo  implements IDuelo{
 	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,Personagem heroi1,Personagem heroi2) throws NullPointerException {
 		System.out.println("Pontos do heroi 1: " + heroi1Hab);
 		System.out.println("Pontos do heroi 2: " + heroi2Hab);
-		if(heroi1Hab == heroi2Hab) {
+		if(heroi1Hab.intValue() == heroi2Hab.intValue()) {
+			System.out.println("Empate");
 			return null;
 		}
-		else if(heroi1Hab > heroi2Hab ) {
+		else if(heroi1Hab.intValue() > heroi2Hab.intValue() ) {
 			heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 1 venceu a partida !!!");

@@ -15,6 +15,7 @@ public class Partida {
 	}
 	
 	public void IniciarPartidas(int quantidade) {
+
 		try {
 			
 			Duelo duelo = null;
@@ -42,8 +43,12 @@ public class Partida {
 					System.out.println();
 					//iniciar combates e definir vencedores e perdedores
 					Personagem vencedor = duelo.iniciarCombate(heroi1, heroi2);
+					int tentativasDeDesempate = 0;
 					while(vencedor == null) {
 						vencedor = duelo.iniciarCombate(heroi1, heroi2);
+						if(tentativasDeDesempate > 3) {
+							heroi2 = duelo.randomizarHerois();
+						}
 					}
 					heroi1 = vencedor;
 					heroi2 = duelo.randomizarHerois();
@@ -51,7 +56,7 @@ public class Partida {
 					counter++;
 				}
 		}catch(NullPointerException e) {
-			
+			e.printStackTrace();
 		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
