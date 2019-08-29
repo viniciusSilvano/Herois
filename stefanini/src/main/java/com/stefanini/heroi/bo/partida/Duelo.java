@@ -1,6 +1,7 @@
 package com.stefanini.heroi.bo.partida;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,6 +14,7 @@ public class Duelo  implements IDuelo{
 	
 	private List<Personagem> herois;
 	private Random random;
+	private List<Placar> placares = new ArrayList<Placar>();
 	
 	public Duelo() {
 		
@@ -21,7 +23,11 @@ public class Duelo  implements IDuelo{
 		this.random = random;
 		this.InicializarListaDeHerois();
 	}
-		
+			
+	public List<Placar> getPlacares() {
+		return placares;
+	}
+	
 	private void InicializarListaDeHerois() {
 		try {
 			BancoMemoriaUtil bancoMemoriaUtil = BancoMemoriaUtil.getInstance();
@@ -56,7 +62,8 @@ public class Duelo  implements IDuelo{
 					heroi1.getInteligencia(), 
 					heroi2.getInteligencia(),
 					heroi1,
-					heroi2
+					heroi2,
+					EnumPersonagemHabilidades.INTELIGENCIA
 					);
 			if(resultado != null) {
 				if(resultado == heroi1) {
@@ -76,7 +83,8 @@ public class Duelo  implements IDuelo{
 					heroi1.getCombate(), 
 					heroi2.getCombate(),
 					heroi1,
-					heroi2
+					heroi2,
+					EnumPersonagemHabilidades.COMBATE
 					);
 			if(resultado != null) {
 				if(resultado == heroi1) {
@@ -95,7 +103,8 @@ public class Duelo  implements IDuelo{
 					heroi1.getDefesa(), 
 					heroi2.getDefesa(),
 					heroi1,
-					heroi2
+					heroi2,
+					EnumPersonagemHabilidades.DEFESA
 					);
 			if(resultado != null) {
 				if(resultado == heroi1) {
@@ -114,7 +123,8 @@ public class Duelo  implements IDuelo{
 					heroi1.getDestreza(), 
 					heroi2.getDestreza(),
 					heroi1,
-					heroi2
+					heroi2,
+					EnumPersonagemHabilidades.DESTREZA
 					);
 			if(resultado != null) {
 				if(resultado == heroi1) {
@@ -133,7 +143,8 @@ public class Duelo  implements IDuelo{
 					heroi1.getForca(), 
 					heroi2.getForca(),
 					heroi1,
-					heroi2
+					heroi2,
+					EnumPersonagemHabilidades.FORCA
 					);
 			if(resultado != null) {
 				if(resultado == heroi1) {
@@ -152,7 +163,8 @@ public class Duelo  implements IDuelo{
 					heroi1.getPoder(), 
 					heroi2.getPoder(),
 					heroi1,
-					heroi2
+					heroi2,
+					EnumPersonagemHabilidades.PODER
 					);
 			if(resultado != null) {
 				if(resultado == heroi1) {
@@ -170,7 +182,8 @@ public class Duelo  implements IDuelo{
 	}
 	
 	//retorna o heroi vencedor ou em caso de empate null
-	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,Personagem heroi1,Personagem heroi2) throws NullPointerException {
+	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,
+			Personagem heroi1,Personagem heroi2, EnumPersonagemHabilidades habilidadeEscolhida) throws NullPointerException {
 		System.out.println("Pontos do heroi 1: " + heroi1Hab);
 		System.out.println("Pontos do heroi 2: " + heroi2Hab);
 		if(heroi1Hab.intValue() == heroi2Hab.intValue()) {
@@ -183,11 +196,13 @@ public class Duelo  implements IDuelo{
 			heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 1 venceu a partida !!!");
+			placares.add(new Placar(heroi1,heroi2,heroi1Hab,heroi2Hab,habilidadeEscolhida));
 			return heroi1;
 		}else {
 			heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 			heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 			System.out.println("Heroi 2 venceu a partida !!!");
+			placares.add(new Placar(heroi2,heroi1,heroi2Hab,heroi1Hab,habilidadeEscolhida));
 			return heroi2;
 			
 		}

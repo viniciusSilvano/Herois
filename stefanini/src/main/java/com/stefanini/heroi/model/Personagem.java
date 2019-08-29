@@ -19,6 +19,7 @@ public class Personagem {
 	private Integer poder;
 	private Integer combate;
 	private Integer defesa;
+	private Integer vitorias;
 	
 	public Integer getDefesa() {
 		return defesa;
@@ -80,6 +81,12 @@ public class Personagem {
 		this.situacao = situacao;
 	}
 	
+	public Integer getVitorias() {
+		return vitorias;
+	}
+	public void setVitorias(Integer vitorias) {
+		this.vitorias = vitorias;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

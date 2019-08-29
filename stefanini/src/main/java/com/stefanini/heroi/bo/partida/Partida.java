@@ -1,5 +1,8 @@
 package com.stefanini.heroi.bo.partida;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -10,10 +13,26 @@ import com.stefanini.heroi.model.Personagem;
 //@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Partida {
 	private DueloFactory dueloFactory = DueloFactory.getInstance();
+	private List<Placar> placares = new ArrayList<Placar>();
+	
 	public Partida(){
 		
 	}
 	
+	
+	
+	public List<Placar> getPlacares() {
+		return placares;
+	}
+
+
+
+	public void setPlacares(List<Placar> placares) {
+		this.placares = placares;
+	}
+
+
+
 	public void IniciarPartidas(int quantidade) {
 
 		try {
@@ -52,9 +71,10 @@ public class Partida {
 					}
 					heroi1 = vencedor;
 					heroi2 = duelo.randomizarHerois();
-					
+
 					counter++;
 				}
+				this.setPlacares(duelo.getPlacares());
 		}catch(NullPointerException e) {
 			e.printStackTrace();
 		}catch (Exception e) {
