@@ -3,14 +3,12 @@ package com.stefanini.heroi.bo.partida;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.stefanini.heroi.bo.partida.factory.DueloFactory;
 import com.stefanini.heroi.bo.partida.factory.IPartida;
 import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.Personagem;
-import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
 import com.stefanini.heroi.util.PersonagemUtil;
 
