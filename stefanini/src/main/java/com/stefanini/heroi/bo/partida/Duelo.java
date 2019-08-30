@@ -56,9 +56,6 @@ public class Duelo  implements IDuelo{
 		return false;
 	}
 	
-	private void ModificarAtributos(Personagem heroi1,Personagem heroi2) {
-		
-	}
 	
 	//retorna o heroi vencedor
 	protected Personagem iniciarCombate(Personagem heroi1, Personagem heroi2) throws NullPointerException {

@@ -1,9 +1,5 @@
 package com.stefanini.heroi;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -12,9 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.WebApplicationInitializer;
 
-import com.stefanini.heroi.bo.partida.Duelo;
 import com.stefanini.heroi.bo.partida.Partida;
-import com.stefanini.heroi.model.Personagem;
 
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
