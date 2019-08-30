@@ -22,6 +22,10 @@ stefanini.config(['$stateProvider', '$urlRouterProvider', '$routeProvider', func
 		url:'/duelar',
 		templateUrl: 'pages/heroi/duelo.html',
 		controller: 'dueloController',
+	}).state('mutante', {
+		url:'/mutante',
+		templateUrl: 'pages/heroi/mutante.html',
+		controller: 'mutanteController'
 	});
    $urlRouterProvider.otherwise('/');
 }]);

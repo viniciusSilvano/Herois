@@ -1,8 +1,6 @@
 package com.stefanini.heroi.controller;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,22 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stefanini.heroi.dto.PlacarDTO;
-import com.stefanini.heroi.service.PartidaService;
+import com.stefanini.heroi.dto.PersonagemDTO;
+import com.stefanini.heroi.service.PersonagemService;
 
 @RestController
-public class DueloController {
-	@Autowired
-	PartidaService partidaService;
+public class MutanteController {
 	
-	@RequestMapping(value = "/duelar",method = RequestMethod.GET)
-	public ResponseEntity<List<PlacarDTO>> duelar(HttpServletResponse response) throws IOException {
-		List<PlacarDTO> placares = partidaService.iniciarPartidasERetornarPlacar();
+	@Autowired
+	PersonagemService personagemService;
+	
+	@RequestMapping(value = "/mutante", method = RequestMethod.GET)
+	public ResponseEntity<PersonagemDTO> getMutante(HttpServletResponse response) throws IOException {
 		try {
-			return new ResponseEntity<List<PlacarDTO>>(placares,HttpStatus.OK);
-		}catch(NullPointerException e){
-			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		}catch(NoSuchElementException e) {
+			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.OK);
+		}catch(NullPointerException e) {
 			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		}catch(Exception e) {
 			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());

@@ -17,7 +17,7 @@ public class Partida implements IPartida {
 	private PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
 	private List<PlacarDTO> placares = new ArrayList<PlacarDTO>();
 	
-	private static Personagem MUTANTE;
+	public static Personagem MUTANTE;
 	private Personagem primeiroLugar;
 	private Personagem segundoLugar;
 	

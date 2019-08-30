@@ -1,8 +1,14 @@
 package com.stefanini.heroi.dto;
 
+import java.io.Serializable;
+
 import com.stefanini.heroi.model.Personagem;
 
-public class PersonagemDTO {
+public class PersonagemDTO implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3059294818014827592L;
 	private String nome;
 	private Integer inteligencia;
 	private Integer forca;
@@ -32,7 +38,7 @@ public class PersonagemDTO {
 		this.defesa = defesa;
 	}
 	
-	public PersonagemDTO converterMutanteParaDTO(Personagem personagem) {
+	public static PersonagemDTO converterMutanteParaDTO(Personagem personagem) {
 		return new PersonagemDTO(personagem.getNome(),
 				personagem.getInteligencia(),
 				personagem.getForca(),
