@@ -25,10 +25,9 @@ public class MutanteController {
 		try {
 			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.OK);
 		}catch(NullPointerException e) {
-			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(Exception e) {
-			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return null;
 	}
 }

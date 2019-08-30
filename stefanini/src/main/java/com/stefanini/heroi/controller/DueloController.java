@@ -1,6 +1,7 @@
 package com.stefanini.heroi.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -22,17 +23,17 @@ public class DueloController {
 	PartidaService partidaService;
 	
 	@RequestMapping(value = "/duelar",method = RequestMethod.GET)
-	public ResponseEntity<List<PlacarDTO>> duelar(HttpServletResponse response) throws IOException {
+	public ResponseEntity<List<PlacarDTO>> duelar() throws IOException {
 		List<PlacarDTO> placares = partidaService.iniciarPartidasERetornarPlacar();
 		try {
 			return new ResponseEntity<List<PlacarDTO>>(placares,HttpStatus.OK);
 		}catch(NullPointerException e){
-			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			//response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<List<PlacarDTO>>(new ArrayList<PlacarDTO>(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(NoSuchElementException e) {
-			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<List<PlacarDTO>>(new ArrayList<PlacarDTO>(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(Exception e) {
-			response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
+			return new ResponseEntity<List<PlacarDTO>>(new ArrayList<PlacarDTO>(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return null;
 	}
 }
