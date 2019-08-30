@@ -14,8 +14,6 @@ import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
 import com.stefanini.heroi.util.PersonagemUtil;
 
-@Component
-@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Partida {
 	private DueloFactory dueloFactory = DueloFactory.getInstance();
 	private PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
