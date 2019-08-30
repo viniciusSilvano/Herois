@@ -11,7 +11,11 @@ public class PersonagemDTO {
 	private Integer combate;
 	private Integer defesa;
 	
-	private PersonagemDTO(String nome,
+	public PersonagemDTO() {
+		
+	}
+	
+	public PersonagemDTO(String nome,
 		Integer inteligencia,
 		Integer forca,
 		Integer destreza,
@@ -19,7 +23,13 @@ public class PersonagemDTO {
 		Integer combate,
 		Integer defesa
 	){
-		
+		this.nome = nome;
+		this.inteligencia = inteligencia;
+		this.forca = forca;
+		this.destreza = destreza;
+		this.poder = poder;
+		this.combate = combate;
+		this.defesa = defesa;
 	}
 	
 	public PersonagemDTO converterMutanteParaDTO(Personagem personagem) {
@@ -31,4 +41,62 @@ public class PersonagemDTO {
 				personagem.getCombate(),
 				personagem.getDefesa());
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Integer getInteligencia() {
+		return inteligencia;
+	}
+
+	public void setInteligencia(Integer inteligencia) {
+		this.inteligencia = inteligencia;
+	}
+
+	public Integer getForca() {
+		return forca;
+	}
+
+	public void setForca(Integer forca) {
+		this.forca = forca;
+	}
+
+	public Integer getDestreza() {
+		return destreza;
+	}
+
+	public void setDestreza(Integer destreza) {
+		this.destreza = destreza;
+	}
+
+	public Integer getPoder() {
+		return poder;
+	}
+
+	public void setPoder(Integer poder) {
+		this.poder = poder;
+	}
+
+	public Integer getCombate() {
+		return combate;
+	}
+
+	public void setCombate(Integer combate) {
+		this.combate = combate;
+	}
+
+	public Integer getDefesa() {
+		return defesa;
+	}
+
+	public void setDefesa(Integer defesa) {
+		this.defesa = defesa;
+	}
+	
 }
+
