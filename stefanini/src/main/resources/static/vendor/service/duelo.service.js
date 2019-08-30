@@ -4,7 +4,7 @@
 stefanini.service('dueloService', ['$http', 
                                 function($http){
 	
-	this.getPersonagem = function(uri){
+	this.getResultados = function(uri){
 		return $http.get(uri + '/duelar');
 	};
 	
