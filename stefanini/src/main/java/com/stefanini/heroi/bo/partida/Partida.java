@@ -89,7 +89,10 @@ public class Partida implements IPartida {
 				
 		}catch(NullPointerException e) {
 			e.printStackTrace();
-		}catch (Exception e) {
+		}catch(ClassCastException e) {
+			
+		}
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -17,7 +17,10 @@ public class PartidaService {
 			Partida partida = (Partida) partidaFactory.getObject();
 			partida.IniciarPartidas(10);
 			return partida.getPlacares();
-		} catch (Exception e) {
+		}catch(ClassCastException e) {
+			e.printStackTrace();
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
