@@ -3,7 +3,7 @@ package com.stefanini.heroi.dto;
 import java.io.Serializable;
 
 import com.stefanini.heroi.model.Personagem;
-import com.stefanini.heroi.util.EnumPersonagemHabilidades;
+import com.stefanini.heroi.util.enuns.EnumPersonagemHabilidades;
 
 public class PlacarDTO implements Serializable{
 	/**

@@ -1,4 +1,4 @@
-package com.stefanini.heroi.util;
+package com.stefanini.heroi.util.enuns;
 
 
 public enum EnumPersonagemSituacao{

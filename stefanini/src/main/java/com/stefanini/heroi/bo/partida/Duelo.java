@@ -12,8 +12,8 @@ import com.stefanini.heroi.bo.partida.factory.IDuelo;
 import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
-import com.stefanini.heroi.util.EnumPersonagemHabilidades;
-import com.stefanini.heroi.util.EnumPersonagemSituacao;
+import com.stefanini.heroi.util.enuns.EnumPersonagemHabilidades;
+import com.stefanini.heroi.util.enuns.EnumPersonagemSituacao;
 
 @Component
 public class Duelo  implements IDuelo{

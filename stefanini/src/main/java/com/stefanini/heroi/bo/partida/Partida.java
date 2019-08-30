@@ -3,12 +3,14 @@ package com.stefanini.heroi.bo.partida;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.stefanini.heroi.bo.partida.factory.DueloFactory;
 import com.stefanini.heroi.bo.partida.factory.IPartida;
 import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
 import com.stefanini.heroi.util.PersonagemUtil;
 
@@ -32,6 +34,7 @@ public class Partida implements IPartida {
 
 	public void setPlacares(List<PlacarDTO> placares) {
 		this.placares = placares;
+		
 	}
 
 
@@ -97,9 +100,13 @@ public class Partida implements IPartida {
 			this.primeiroLugar = personagensVencedores.stream()
 					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias())).get();
 					
-			this.segundoLugar = personagensVencedores.stream()
+			segundoLugar = personagensVencedores.stream()
 					.filter(x -> !x.equals(primeiroLugar))
-					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias())).get();
+					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias()))
+					.orElse( (Personagem) personagemFactory
+							.getObject("N/A", "N/A", 
+									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), 
+									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0)));
 			
 			System.out.println();
 			System.out.println("-----------------------------------------------------");
@@ -115,6 +122,8 @@ public class Partida implements IPartida {
 			e.printStackTrace();
 		}catch(IndexOutOfBoundsException e) {
 			e.printStackTrace();
+		}catch(Exception e) {
+			
 		}
 	}
 	

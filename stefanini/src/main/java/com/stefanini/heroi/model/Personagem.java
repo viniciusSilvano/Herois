@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.stefanini.heroi.model.factory.IPersonagem;
-import com.stefanini.heroi.util.EnumPersonagemSituacao;
+import com.stefanini.heroi.util.enuns.EnumPersonagemSituacao;
 
 /**
  * Classe que irá carregar todos os personagens

@@ -1,8 +1,9 @@
-package com.stefanini.heroi.util;
+package com.stefanini.heroi.util.enuns;
 
 import java.util.Random;
 
 import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.util.IAtributo;
 
 public enum EnumPersonagemHabilidades implements IAtributo {
 	INTELIGENCIA{

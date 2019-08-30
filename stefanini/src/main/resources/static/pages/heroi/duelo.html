@@ -1,6 +1,7 @@
 
 <body>
-<div id="wrap">
+	<link href="vendor/css/duelo.css" rel="stylesheet" type="text/css"/>
+	<div id="wrap">
 	<div ng-controller="abstractController"><menu></menu></div>
 		<div class="text-app-titulo">| Duelos |</div>
 			<h1>Duelos</h1>
@@ -10,6 +11,23 @@
 						<button type="button" class="bouton-contact" ng-click="duelar()">Duelar 10 partidas aleatorias</button>
 					</div>
 				</div>
+				<div class="placarContainer" ng-repeat="duelo in duelos">
+					<div class="vencedor">
+						<span class="tituloVencedor">Vencedor:</span> 
+						<div class="informacoesHeroi">
+							Nome: {{duelo.vencedor.nome}}<br>
+							Alinhamento: {{duelo.vencedor.alinhamento}}
+						</div>
+					</div>
+					<div class="perdedor">
+						<span class="tituloPerdedor">Perdedor:</span>
+						<div class="informacoesHeroi">
+							Nome: {{duelo.perdedor.nome}}<br>
+							Alinhamento: {{duelo.perdedor.alinhamento}}
+						</div>
+					</div>
+				</div>
 			</form>
-		</div>
+	</div>
+		
 </body>
