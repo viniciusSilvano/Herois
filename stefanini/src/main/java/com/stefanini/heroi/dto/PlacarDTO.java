@@ -1,16 +1,22 @@
-package com.stefanini.heroi.bo.partida;
+package com.stefanini.heroi.dto;
+
+import java.io.Serializable;
 
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.EnumPersonagemHabilidades;
 
-public class Placar {
+public class PlacarDTO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3214932952899046334L;
 	private Personagem vencedor;
 	private Personagem perdedor;
 	private EnumPersonagemHabilidades habilidade;
 	private Integer vencedorHabilidadeValor;
 	private Integer perdedorHabilidadeValor;
 	
-	public Placar(Personagem vencedor, Personagem perdedor,
+	public PlacarDTO(Personagem vencedor, Personagem perdedor,
 			Integer vencedorHabilidadeValor, Integer perdedorHabilidadeValor, EnumPersonagemHabilidades habilidade) {
 		this.vencedor = vencedor;
 		this.perdedor = perdedor;

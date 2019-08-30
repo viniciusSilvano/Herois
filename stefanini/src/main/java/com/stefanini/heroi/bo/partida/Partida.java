@@ -5,19 +5,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.stefanini.heroi.bo.partida.factory.DueloFactory;
+import com.stefanini.heroi.bo.partida.factory.IPartida;
+import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
 import com.stefanini.heroi.util.PersonagemUtil;
 
-public class Partida {
+public class Partida implements IPartida {
 	private DueloFactory dueloFactory = DueloFactory.getInstance();
 	private PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
-	private List<Placar> placares = new ArrayList<Placar>();
+	private List<PlacarDTO> placares = new ArrayList<PlacarDTO>();
 	
 	private static Personagem MUTANTE;
 	private Personagem primeiroLugar;
@@ -26,19 +24,15 @@ public class Partida {
 	public Partida(){
 		
 	}
-	
-	
-	
-	public List<Placar> getPlacares() {
+		
+	public List<PlacarDTO> getPlacares() {
 		return placares;
 	}
 
 
-
-	public void setPlacares(List<Placar> placares) {
+	public void setPlacares(List<PlacarDTO> placares) {
 		this.placares = placares;
 	}
-
 
 
 	public void IniciarPartidas(int quantidade) {
@@ -97,7 +91,7 @@ public class Partida {
 	}
 	private void definirSegundoEPrimerioLugar() {
 		try {	
-			List<Personagem> personagensVencedores = placares.stream().map(Placar::getVencedor)
+			List<Personagem> personagensVencedores = placares.stream().map(PlacarDTO::getVencedor)
 					.collect(Collectors.toList());
 					
 			this.primeiroLugar = personagensVencedores.stream()
@@ -123,6 +117,7 @@ public class Partida {
 			e.printStackTrace();
 		}
 	}
+	
 	private void criarMutante() {
 		try {
 			MUTANTE = (Personagem) personagemFactory.getObject();

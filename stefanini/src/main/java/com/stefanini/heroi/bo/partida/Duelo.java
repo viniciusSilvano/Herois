@@ -9,6 +9,7 @@ import java.util.Random;
 import org.springframework.stereotype.Component;
 
 import com.stefanini.heroi.bo.partida.factory.IDuelo;
+import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 import com.stefanini.heroi.util.EnumPersonagemHabilidades;
@@ -19,7 +20,7 @@ public class Duelo  implements IDuelo{
 	
 	private List<Personagem> herois;
 	private Random random;
-	private List<Placar> placares = new ArrayList<Placar>();
+	private List<PlacarDTO> placares = new ArrayList<PlacarDTO>();
 	
 	public Duelo() {
 		
@@ -29,7 +30,7 @@ public class Duelo  implements IDuelo{
 		this.InicializarListaDeHerois();
 	}
 			
-	public List<Placar> getPlacares() {
+	public List<PlacarDTO> getPlacares() {
 		return placares;
 	}
 	
@@ -148,14 +149,14 @@ public class Duelo  implements IDuelo{
 				heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 				System.out.println("Heroi 1 venceu a partida !!!");
 				heroi1.setVitorias(heroi1.getVitorias().intValue() + 1);
-				placares.add(new Placar(heroi1,heroi2,heroi1Hab,heroi2Hab,habilidadeEscolhida));
+				placares.add(new PlacarDTO(heroi1,heroi2,heroi1Hab,heroi2Hab,habilidadeEscolhida));
 				return heroi1;
 			case -1:
 				heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 				heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
 				System.out.println("Heroi 2 venceu a partida !!!");
 				heroi2.setVitorias(heroi2.getVitorias().intValue() + 1);
-				placares.add(new Placar(heroi2,heroi1,heroi2Hab,heroi1Hab,habilidadeEscolhida));
+				placares.add(new PlacarDTO(heroi2,heroi1,heroi2Hab,heroi1Hab,habilidadeEscolhida));
 				return heroi2;
 			default:
 				return null;
