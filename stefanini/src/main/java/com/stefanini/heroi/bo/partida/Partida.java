@@ -136,7 +136,10 @@ public class Partida implements IPartida {
 	private void criarMutante() {
 		try {
 			MUTANTE = (Personagem) personagemFactory.getObject();
-		} catch (Exception e) {
+		}catch (ClassCastException e) {
+			e.printStackTrace();
+		} 
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
