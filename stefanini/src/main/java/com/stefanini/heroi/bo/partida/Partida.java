@@ -66,8 +66,10 @@ public class Partida implements IPartida {
 					//iniciar combates e definir vencedores e perdedores
 					Personagem vencedor = duelo.iniciarCombate(heroi1, heroi2);
 					int tentativasDeDesempate = 0;
+					//enquanto o vencedor não for definido reinicie o combate
 					while(vencedor == null) {
 						vencedor = duelo.iniciarCombate(heroi1, heroi2);
+						//se não desempatar após 3 tentativas traga um novo heroi.
 						if(tentativasDeDesempate > 3) {
 							heroi2 = duelo.randomizarHerois();
 						}
@@ -78,8 +80,11 @@ public class Partida implements IPartida {
 
 					counter++;
 				}
+				//Depois de terminada as partidas definimos os placares
 				this.setPlacares(duelo.getPlacares());
+				//definimos o primeiro e segundo lugar
 				this.definirSegundoEPrimerioLugar();
+				//e por ultimo criamos o mutante
 				this.criarMutante();
 				
 		}catch(NullPointerException e) {
@@ -121,7 +126,7 @@ public class Partida implements IPartida {
 		}catch(IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 	

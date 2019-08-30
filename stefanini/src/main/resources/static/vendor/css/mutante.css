@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+.mutanteContainer{
+	background-color: #d1d1e0;
+	margin: 10px;
+	width: 50%;
+	height: 50%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	
+}
+

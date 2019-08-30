@@ -1,5 +1,6 @@
 <body>
 <div id="wrap">
+	<link href="vendor/css/mutante.css" rel="stylesheet" type="text/css"/>
 	<div ng-controller="abstractController"><menu></menu></div>
 	<div class="text-app-titulo">| Mutante |</div>
 	<form ng-controller="mutanteController">
@@ -7,6 +8,15 @@
 			<div>
 				<button type="button" class="bouton-contact" ng-click="mutante()">O Mutante</button>
 			</div>
+		</div>
+		<div class="mutanteContainer">
+			<p class="tituloMutante">Nome: </p><span class="dadoMutante">{{mutante.nome}}</span>
+			<p class="tituloMutante">Inteligencia: </p><span class="dadoMutante">{{mutante.inteligencia}}</span>
+			<p class="tituloMutante">Forca: </p><span class="dadoMutante">{{mutante.forca}}</span>
+			<p class="tituloMutante">Destreza: </p><span class="dadoMutante">{{mutante.destreza}}</span>
+			<p class="tituloMutante">Poder: </p><span class="dadoMutante">{{mutante.poder}}</span>
+			<p class="tituloMutante">Combate: </p><span class="dadoMutante">{{mutante.combate}}</span>
+			<p class="tituloMutante">Defesa: </p><span class="dadoMutante">{{mutante.defesa}}</span>
 		</div>
 	</form>
 </div>
