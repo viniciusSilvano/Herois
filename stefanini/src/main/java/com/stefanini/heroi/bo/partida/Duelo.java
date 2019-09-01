@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.stefanini.heroi.bo.partida.factory.IDuelo;
@@ -20,27 +21,26 @@ public class Duelo  implements IDuelo{
 	
 	private List<Personagem> herois;
 	private Random random;
-	private List<PlacarDTO> placares = new ArrayList<PlacarDTO>();
+	private List<PlacarDTO> placares = new ArrayList<>();
+	private Logger logger = Logger.getLogger(Duelo.class);
 	
 	public Duelo() {
-		
 	}
 	public Duelo(Random random) {
 		this.random = random;
-		this.InicializarListaDeHerois();
+		this.inicializarListaDeHerois();
 	}
 			
 	public List<PlacarDTO> getPlacares() {
 		return placares;
 	}
 	
-	private void InicializarListaDeHerois() {
+	private void inicializarListaDeHerois() {
 		try {
 			BancoMemoriaUtil bancoMemoriaUtil = BancoMemoriaUtil.getInstance();
 			this.herois = bancoMemoriaUtil.carregaPersonagens();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erro ao carregar herois do DB");
 		}
 	}
 	
@@ -50,20 +50,21 @@ public class Duelo  implements IDuelo{
 	}
 	
 	protected boolean validarHerois(Personagem heroi1, Personagem heroi2 ) {
+		boolean valido = false;
 		if((!heroi2.getAlinhamento().equals(heroi1.getAlinhamento()))
 				&& heroi1 != heroi2) {
-			return true;
+			valido =  true;
 		}
-		return false;
+		return valido;
 	}
 	
 	
 	//retorna o heroi vencedor
-	protected Personagem iniciarCombate(Personagem heroi1, Personagem heroi2) throws NullPointerException {
+	protected Personagem iniciarCombate(Personagem heroi1, Personagem heroi2){
 		Personagem resultado;
 		switch(EnumPersonagemHabilidades.getRandomHabilidades(this.random)) {
 		case INTELIGENCIA:
-			System.out.println("Habilidade: Inteligência");
+			logger.info("Habilidade: Inteligência");
 			resultado = compararHabilidades(
 					heroi1.getInteligencia(), 
 					heroi2.getInteligencia(),
@@ -74,7 +75,7 @@ public class Duelo  implements IDuelo{
 			EnumPersonagemHabilidades.INTELIGENCIA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case COMBATE:
-			System.out.println("Habilidade: Combate");
+			logger.info("Habilidade: Combate");
 			resultado = compararHabilidades(
 					heroi1.getCombate(), 
 					heroi2.getCombate(),
@@ -85,7 +86,7 @@ public class Duelo  implements IDuelo{
 			EnumPersonagemHabilidades.COMBATE.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case DEFESA:
-			System.out.println("Habilidade: Defesa");
+			logger.info("Habilidade: Defesa");
 			resultado = compararHabilidades(
 					heroi1.getDefesa(), 
 					heroi2.getDefesa(),
@@ -96,7 +97,7 @@ public class Duelo  implements IDuelo{
 			EnumPersonagemHabilidades.DEFESA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case DESTREZA:
-			System.out.println("Habilidade: Destreza");
+			logger.info("Habilidade: Destreza");
 			resultado = compararHabilidades(
 					heroi1.getDestreza(), 
 					heroi2.getDestreza(),
@@ -107,7 +108,7 @@ public class Duelo  implements IDuelo{
 			EnumPersonagemHabilidades.DESTREZA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case FORCA:
-			System.out.println("Habilidade: Força");
+			logger.info("Habilidade: Força");
 			resultado = compararHabilidades(
 					heroi1.getForca(), 
 					heroi2.getForca(),
@@ -118,7 +119,7 @@ public class Duelo  implements IDuelo{
 			EnumPersonagemHabilidades.FORCA.alterarAtributo(heroi1, heroi2, resultado);
 			return resultado;
 		case PODER:
-			System.out.println("Habilidade: Poder");
+			logger.info("Habilidade: Poder");
 			resultado = compararHabilidades(
 					heroi1.getPoder(), 
 					heroi2.getPoder(),
@@ -134,32 +135,35 @@ public class Duelo  implements IDuelo{
 	
 	//retorna o heroi vencedor ou em caso de empate null
 	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,
-			Personagem heroi1,Personagem heroi2, EnumPersonagemHabilidades habilidadeEscolhida) throws NullPointerException {
-		System.out.println("Pontos do heroi 1: " + heroi1Hab);
-		System.out.println("Pontos do heroi 2: " + heroi2Hab);
+			Personagem heroi1,Personagem heroi2, EnumPersonagemHabilidades habilidadeEscolhida){
+		logger.info("Pontos do heroi 1: " + heroi1Hab);
+		logger.info("Pontos do heroi 2: " + heroi2Hab);
 		int resultado = heroi1Hab.compareTo(heroi2Hab);
+		Personagem vencedor = null;
 		switch(resultado) {
 			case 0:
-				System.out.println("Empate");
+				logger.info("Empate");
 				heroi1.setSituacao(EnumPersonagemSituacao.INDIFERENTE);
 				heroi2.setSituacao(EnumPersonagemSituacao.INDIFERENTE);
-				return null;
+				return vencedor;
 			case 1:
 				heroi1.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 				heroi2.setSituacao(EnumPersonagemSituacao.PERDEDOR);
-				System.out.println("Heroi 1 venceu a partida !!!");
+				logger.info("Heroi 1 venceu a partida !!!");
 				heroi1.setVitorias(heroi1.getVitorias().intValue() + 1);
 				placares.add(new PlacarDTO(heroi1,heroi2,heroi1Hab,heroi2Hab,habilidadeEscolhida));
-				return heroi1;
+				vencedor = heroi1;
+				return vencedor;
 			case -1:
 				heroi2.setSituacao(EnumPersonagemSituacao.VENCEDOR);
 				heroi1.setSituacao(EnumPersonagemSituacao.PERDEDOR);
-				System.out.println("Heroi 2 venceu a partida !!!");
+				logger.info("Heroi 2 venceu a partida !!!");
 				heroi2.setVitorias(heroi2.getVitorias().intValue() + 1);
 				placares.add(new PlacarDTO(heroi2,heroi1,heroi2Hab,heroi1Hab,habilidadeEscolhida));
-				return heroi2;
+				vencedor = heroi2;
+				return vencedor;
 			default:
-				return null;
+				return vencedor;
 		}
 		
 	}	
