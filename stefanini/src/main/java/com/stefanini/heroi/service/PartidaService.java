@@ -15,7 +15,7 @@ public class PartidaService {
 	public List<PlacarDTO> iniciarPartidasERetornarPlacar() throws NullPointerException{
 		try {
 			Partida partida = (Partida) partidaFactory.getObject();
-			partida.IniciarPartidas(10);
+			partida.iniciarPartidas(10);
 			return partida.getPlacares();
 		}catch(ClassCastException e) {
 			e.printStackTrace();

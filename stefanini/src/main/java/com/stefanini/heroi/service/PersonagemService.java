@@ -10,7 +10,7 @@ import com.stefanini.heroi.model.factory.PersonagemFactory;
 public class PersonagemService {
 	PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
 	public Personagem getMutante() throws NullPointerException{
-		if(Partida.MUTANTE == null) {
+		if(Partida.getMutante() == null) {
 			try {
 				return (Personagem) personagemFactory.getObject(
 						"N/A",
@@ -27,7 +27,7 @@ public class PersonagemService {
 			}
 			return null;
 		}else {
-			return Partida.MUTANTE;
+			return Partida.getMutante();
 		}
 	}
 }

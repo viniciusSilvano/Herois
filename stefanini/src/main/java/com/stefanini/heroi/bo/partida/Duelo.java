@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -46,7 +47,12 @@ public class Duelo  implements IDuelo{
 	
 	
 	protected Personagem randomizarHerois() {
-		return this.herois.get(random.nextInt(herois.size()));
+		Personagem heroiRandom = this.herois.get(this.random.nextInt(herois.size()));
+		if(heroiRandom != null) {
+			return heroiRandom;
+		}else {
+			throw new IllegalStateException();
+		}
 	}
 	
 	protected boolean validarHerois(Personagem heroi1, Personagem heroi2 ) {

@@ -5,25 +5,26 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import com.stefanini.heroi.bo.partida.factory.DueloFactory;
 import com.stefanini.heroi.bo.partida.factory.IPartida;
 import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
+import com.stefanini.heroi.util.GlobalStrings;
 import com.stefanini.heroi.util.PersonagemUtil;
 
 public class Partida implements IPartida {
 	private DueloFactory dueloFactory = DueloFactory.getInstance();
 	private PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
-	private List<PlacarDTO> placares = new ArrayList<PlacarDTO>();
-	
-	public static Personagem MUTANTE;
+	private List<PlacarDTO> placares = new ArrayList<>();
+	private Logger logger = Logger.getLogger(Partida.class);
+	private static Personagem mutante;
 	private Personagem primeiroLugar;
 	private Personagem segundoLugar;
 	
-	public Partida(){
-		
-	}
+	
 		
 	public List<PlacarDTO> getPlacares() {
 		return placares;
@@ -36,7 +37,7 @@ public class Partida implements IPartida {
 	}
 
 
-	public void IniciarPartidas(int quantidade) {
+	public void iniciarPartidas(int quantidade) {
 
 		try {
 			
@@ -49,9 +50,9 @@ public class Partida implements IPartida {
 				//Randomizar dois herois aleatórios
 				Personagem heroi1 = duelo.randomizarHerois();
 				Personagem heroi2 = duelo.randomizarHerois();
-				System.out.println("-----------------------------------------------------");
-				System.out.println("INICIANDO PARTIDAS");
-				System.out.println("-----------------------------------------------------");
+				logger.info(GlobalStrings.DASH);
+				logger.info("INICIANDO PARTIDAS");
+				logger.info(GlobalStrings.DASH);
 
 				//iniciar a contagem das 10s partidas
 				while(counter < quantidade) {
@@ -59,10 +60,10 @@ public class Partida implements IPartida {
 					while(!duelo.validarHerois(heroi1, heroi2)) {
 						heroi2 = duelo.randomizarHerois();
 					}
-					System.out.println();
-					System.out.println("Heroi 1: " + heroi1.getNome());
-					System.out.println("Heroi 2: " + heroi2.getNome());
-					System.out.println();
+					logger.info(GlobalStrings.LINE_SEPARATOR);
+					logger.info("Heroi 1: " + heroi1.getNome());
+					logger.info("Heroi 2: " + heroi2.getNome());
+					logger.info(GlobalStrings.LINE_SEPARATOR);
 					//iniciar combates e definir vencedores e perdedores
 					Personagem vencedor = duelo.iniciarCombate(heroi1, heroi2);
 					int tentativasDeDesempate = 0;
@@ -88,13 +89,12 @@ public class Partida implements IPartida {
 				this.criarMutante();
 				
 		}catch(NullPointerException e) {
-			e.printStackTrace();
+			logger.error("Null pointer ao tentar iniciar as Partidas");
 		}catch(ClassCastException e) {
-			
+			logger.error("class cast exception ao tentar iniciar as Partidas");
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Ocorreu um erro ao tentar iniciar as partidas");
 		}
 		
 	}
@@ -104,7 +104,8 @@ public class Partida implements IPartida {
 					.collect(Collectors.toList());
 					
 			this.primeiroLugar = personagensVencedores.stream()
-					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias())).get();
+					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias())).orElseThrow(
+							() -> new IllegalStateException("não há um vencedor"));
 					
 			segundoLugar = personagensVencedores.stream()
 					.filter(x -> !x.equals(primeiroLugar))
@@ -114,55 +115,66 @@ public class Partida implements IPartida {
 									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), 
 									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0)));
 			
-			System.out.println();
-			System.out.println("-----------------------------------------------------");
-			System.out.println("COLOCAÇÕES PRINCIPAIS");
-			System.out.println("-----------------------------------------------------");
-			System.out.println("Primeiro lugar:" + primeiroLugar);
-			System.out.println();
-			System.out.println("Segundo lugar:" + segundoLugar);
+			logger.info(GlobalStrings.LINE_SEPARATOR);
+			logger.info(GlobalStrings.DASH);
+			logger.info("COLOCAÇÕES PRINCIPAIS");
+			logger.info(GlobalStrings.DASH);
+			logger.info("Primeiro lugar:" + primeiroLugar);
+			logger.info(GlobalStrings.LINE_SEPARATOR);
+			logger.info("Segundo lugar:" + segundoLugar);
 			
 		}catch(NullPointerException e) {
-			e.printStackTrace();
+			logger.error("null exception ao tentar definir os dois herois vitoriosos");
 		}catch(NoSuchElementException e) {
-			e.printStackTrace();
+			logger.error("Erro no stream ao tentar definir os dois herois vitoriosos");
 		}catch(IndexOutOfBoundsException e) {
-			e.printStackTrace();
+			logger.error("Erro ao tentar recuperar os dois herois vitoriosos da lista");
 		}catch(Exception e) {
-			e.printStackTrace();
+			logger.error("Erro ao tentar definir os dois herois vitoriosos");
 		}
 	}
 	
 	private void criarMutante() {
 		try {
-			MUTANTE = (Personagem) personagemFactory.getObject();
+			Partida.setMutante((Personagem) personagemFactory.getObject());
 		}catch (ClassCastException e) {
-			e.printStackTrace();
+			logger.error("Erro de abstração ao tentar criar o mutante");
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erro ao tentar criar mutante");
 		}
-		MUTANTE.setNome("O Mutante");
-		MUTANTE.setCombate(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+		mutante.setNome("O Mutante");
+		mutante.setCombate(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
 				primeiroLugar.getCombate() ,segundoLugar.getCombate()).getCombate());
 		
-		MUTANTE.setDefesa(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+		mutante.setDefesa(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
 				primeiroLugar.getDefesa() ,segundoLugar.getDefesa()).getDefesa());
 		
-		MUTANTE.setDestreza(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+		mutante.setDestreza(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
 				primeiroLugar.getDestreza() ,segundoLugar.getDestreza()).getDestreza());
 		
-		MUTANTE.setForca(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+		mutante.setForca(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
 				primeiroLugar.getForca() ,segundoLugar.getForca()).getForca());
 		
-		MUTANTE.setInteligencia(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+		mutante.setInteligencia(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
 				primeiroLugar.getInteligencia() ,segundoLugar.getInteligencia()).getInteligencia());
 		
-		MUTANTE.setPoder(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
+		mutante.setPoder(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
 				primeiroLugar.getPoder() ,segundoLugar.getPoder()).getPoder());
 		
-		System.out.println("Mutante criado: " + MUTANTE);
+		logger.info("Mutante criado: " + mutante);
 	}
+
+
+	public static Personagem getMutante() {
+		return mutante;
+	}
+
+
+	public static void setMutante(Personagem mutante) {
+		Partida.mutante = mutante;
+	}
+	
+	
 	
 }
