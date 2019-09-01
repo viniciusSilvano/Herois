@@ -24,19 +24,16 @@ public class DueloFactory implements FactoryBean<IDuelo> {
 	}
 	@Override
 	public IDuelo getObject() throws Exception {
-		// TODO Auto-generated method stub
 		return new Duelo(random);
 	}
 
 	@Override
 	public Class<?> getObjectType() {
-		// TODO Auto-generated method stub
 		return IDuelo.class;
 	}
 
 	@Override
 	public boolean isSingleton() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

@@ -27,12 +27,7 @@ public class DueloController {
 		List<PlacarDTO> placares = partidaService.iniciarPartidasERetornarPlacar();
 		try {
 			return new ResponseEntity<List<PlacarDTO>>(placares,HttpStatus.OK);
-		}catch(NullPointerException e){
-			//response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			return new ResponseEntity<List<PlacarDTO>>(new ArrayList<PlacarDTO>(),HttpStatus.INTERNAL_SERVER_ERROR);
-		}catch(NoSuchElementException e) {
-			return new ResponseEntity<List<PlacarDTO>>(new ArrayList<PlacarDTO>(),HttpStatus.INTERNAL_SERVER_ERROR);
-		}catch(Exception e) {
+		}catch(Exception e){
 			return new ResponseEntity<List<PlacarDTO>>(new ArrayList<PlacarDTO>(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

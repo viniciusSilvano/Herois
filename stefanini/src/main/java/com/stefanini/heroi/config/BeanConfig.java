@@ -13,8 +13,7 @@ import com.stefanini.heroi.model.factory.PersonagemFactory;
 public class BeanConfig { 
 	    @Bean(name = "duelo")
 	    public DueloFactory dueloFactory() {
-	        DueloFactory factory = DueloFactory.getInstance();
-	        return factory;
+	        return DueloFactory.getInstance();
 	    }
 	 
 	    @Bean

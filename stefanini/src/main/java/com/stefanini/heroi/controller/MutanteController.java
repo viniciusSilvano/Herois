@@ -24,8 +24,6 @@ public class MutanteController {
 	public ResponseEntity<PersonagemDTO> getMutante(HttpServletResponse response) throws IOException {
 		try {
 			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.OK);
-		}catch(NullPointerException e) {
-			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(Exception e) {
 			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
