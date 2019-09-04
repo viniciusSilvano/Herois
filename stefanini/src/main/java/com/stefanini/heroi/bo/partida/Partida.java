@@ -23,20 +23,40 @@ public class Partida implements IPartida {
 	private static Personagem mutante;
 	private Personagem primeiroLugar;
 	private Personagem segundoLugar;
-	
-	
-		
+			
 	public List<PlacarDTO> getPlacares() {
 		return placares;
 	}
+	
+	private Personagem getPrimeiroLugar() {
+		return primeiroLugar;
+	}
 
+	private void setPrimeiroLugar(Personagem primeiroLugar) {
+		this.primeiroLugar = primeiroLugar;
+	}
+
+	private Personagem getSegundoLugar() {
+		return segundoLugar;
+	}
+
+	private void setSegundoLugar(Personagem segundoLugar) {
+		this.segundoLugar = segundoLugar;
+	}
 
 	public void setPlacares(List<PlacarDTO> placares) {
 		this.placares = placares;
 		
 	}
+	
+	public static Personagem getMutante() {
+		return mutante;
+	}
 
-
+	public static void setMutante(Personagem mutante) {
+		Partida.mutante = mutante;
+	}
+	
 	public void iniciarPartidas(int quantidade) {
 
 		try {
@@ -73,6 +93,7 @@ public class Partida implements IPartida {
 						//se não desempatar após 3 tentativas traga um novo heroi.
 						if(tentativasDeDesempate > 3) {
 							heroi2 = duelo.randomizarHerois();
+							tentativasDeDesempate = 0;
 						}
 						tentativasDeDesempate++;
 					}
@@ -98,22 +119,23 @@ public class Partida implements IPartida {
 		}
 		
 	}
+	
 	private void definirSegundoEPrimerioLugar() {
 		try {	
-			List<Personagem> personagensVencedores = placares.stream().map(PlacarDTO::getVencedor)
+			List<Personagem> personagensVencedores = this.getPlacares().stream().map(PlacarDTO::getVencedor)
 					.collect(Collectors.toList());
 					
-			this.primeiroLugar = personagensVencedores.stream()
+			this.setPrimeiroLugar(personagensVencedores.stream()
 					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias())).orElseThrow(
-							() -> new IllegalStateException("não há um vencedor"));
+							() -> new IllegalStateException("não há um vencedor")));
 					
-			segundoLugar = personagensVencedores.stream()
-					.filter(x -> !x.equals(primeiroLugar))
+			this.setSegundoLugar(personagensVencedores.stream()
+					.filter(x -> !x.equals(this.getPrimeiroLugar()))
 					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias()))
 					.orElse( (Personagem) personagemFactory
 							.getObject("N/A", "N/A", 
 									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), 
-									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0)));
+									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0))));
 			
 			logger.info(GlobalStrings.LINE_SEPARATOR);
 			logger.info(GlobalStrings.DASH);
@@ -143,38 +165,26 @@ public class Partida implements IPartida {
 		catch (Exception e) {
 			logger.error("Erro ao tentar criar mutante");
 		}
-		mutante.setNome("O Mutante");
-		mutante.setCombate(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
-				primeiroLugar.getCombate() ,segundoLugar.getCombate()).getCombate());
+		Partida.getMutante().setNome("O Mutante");
+		Partida.getMutante().setCombate(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar(),
+				this.getPrimeiroLugar().getCombate() ,this.getSegundoLugar().getCombate()).getCombate());
 		
-		mutante.setDefesa(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
-				primeiroLugar.getDefesa() ,segundoLugar.getDefesa()).getDefesa());
+		Partida.getMutante().setDefesa(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+				this.getPrimeiroLugar().getDefesa() ,this.getSegundoLugar().getDefesa()).getDefesa());
 		
-		mutante.setDestreza(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
-				primeiroLugar.getDestreza() ,segundoLugar.getDestreza()).getDestreza());
+		Partida.getMutante().setDestreza(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+				this.getPrimeiroLugar().getDestreza() ,this.getSegundoLugar().getDestreza()).getDestreza());
 		
-		mutante.setForca(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
-				primeiroLugar.getForca() ,segundoLugar.getForca()).getForca());
+		Partida.getMutante().setForca(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+				this.getPrimeiroLugar().getForca() ,this.getSegundoLugar().getForca()).getForca());
 		
-		mutante.setInteligencia(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
-				primeiroLugar.getInteligencia() ,segundoLugar.getInteligencia()).getInteligencia());
+		Partida.getMutante().setInteligencia(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+				this.getPrimeiroLugar().getInteligencia() ,this.getSegundoLugar().getInteligencia()).getInteligencia());
 		
-		mutante.setPoder(PersonagemUtil.PersonagemComparator(primeiroLugar,segundoLugar ,
-				primeiroLugar.getPoder() ,segundoLugar.getPoder()).getPoder());
+		Partida.getMutante().setPoder(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+				this.getPrimeiroLugar().getPoder() ,this.getSegundoLugar().getPoder()).getPoder());
 		
-		logger.info("Mutante criado: " + mutante);
+		logger.info("Mutante criado: " + Partida.getMutante());
 	}
-
-
-	public static Personagem getMutante() {
-		return mutante;
-	}
-
-
-	public static void setMutante(Personagem mutante) {
-		Partida.mutante = mutante;
-	}
-	
-	
 	
 }
