@@ -1,3 +1,5 @@
+* Desafio realizado pela empresa Stefanini
+
 # Regras:
 
 * Implementar um jogo de duelos entre heróis a partir da base de dados e do projeto Java disponibilizado.
