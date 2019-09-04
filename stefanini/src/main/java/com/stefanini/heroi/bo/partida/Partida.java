@@ -76,27 +76,19 @@ public class Partida implements IPartida {
 
 				//iniciar a contagem das 10s partidas
 				while(counter < quantidade) {
-					//validar herois.
-					while(!duelo.validarHerois(heroi1, heroi2)) {
-						heroi2 = duelo.randomizarHerois();
-					}
+					
+					this.validarHerois(duelo, heroi1, heroi2);
 					logger.info(GlobalStrings.LINE_SEPARATOR);
 					logger.info("Heroi 1: " + heroi1.getNome());
 					logger.info("Heroi 2: " + heroi2.getNome());
 					logger.info(GlobalStrings.LINE_SEPARATOR);
+					
 					//iniciar combates e definir vencedores e perdedores
 					Personagem vencedor = duelo.iniciarCombate(heroi1, heroi2);
-					int tentativasDeDesempate = 0;
-					//enquanto o vencedor não for definido reinicie o combate
-					while(vencedor == null) {
-						vencedor = duelo.iniciarCombate(heroi1, heroi2);
-						//se não desempatar após 3 tentativas traga um novo heroi.
-						if(tentativasDeDesempate > 3) {
-							heroi2 = duelo.randomizarHerois();
-							tentativasDeDesempate = 0;
-						}
-						tentativasDeDesempate++;
-					}
+					
+					//validar o resultado do duelo
+					validarResultadoDuelo(duelo,heroi1,heroi2,vencedor);
+					
 					heroi1 = vencedor;
 					heroi2 = duelo.randomizarHerois();
 
@@ -119,7 +111,25 @@ public class Partida implements IPartida {
 		}
 		
 	}
+	private void validarHerois(Duelo duelo, Personagem heroi1, Personagem heroi2) {
+		while(!duelo.validarHerois(heroi1, heroi2)) {
+			heroi2 = duelo.randomizarHerois();
+		}
+	}
 	
+	private void validarResultadoDuelo(Duelo duelo, Personagem heroi1,Personagem heroi2, Personagem vencedor) {
+		int tentativasDeDesempate = 0;
+		//enquanto o vencedor não for definido reinicie o combate
+		while(vencedor == null) {
+			vencedor = duelo.iniciarCombate(heroi1, heroi2);
+			//se não desempatar após 3 tentativas traga um novo heroi.
+			if(tentativasDeDesempate > 3) {
+				heroi2 = duelo.randomizarHerois();
+				tentativasDeDesempate = 0;
+			}
+			tentativasDeDesempate++;
+		}
+	}
 	private void definirSegundoEPrimerioLugar() {
 		try {	
 			List<Personagem> personagensVencedores = this.getPlacares().stream().map(PlacarDTO::getVencedor)
@@ -160,7 +170,7 @@ public class Partida implements IPartida {
 		try {
 			Partida.setMutante((Personagem) personagemFactory.getObject());
 		}catch (ClassCastException e) {
-			logger.error("Erro de abstração ao tentar criar o mutante");
+			logger.error("Erro de polimorfismo ao tentar criar o mutante");
 		} 
 		catch (Exception e) {
 			logger.error("Erro ao tentar criar mutante");
