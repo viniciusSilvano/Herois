@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.stefanini.heroi.bo.partida.factory.IDuelo;
 import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.util.BancoMemoriaUtil;
 import com.stefanini.heroi.util.enuns.EnumPersonagemHabilidades;
 import com.stefanini.heroi.util.enuns.EnumPersonagemSituacao;
@@ -45,8 +46,8 @@ public class Duelo  implements IDuelo{
 	}
 	
 	
-	protected Personagem randomizarHerois() {
-		Personagem heroiRandom = this.herois.get(this.random.nextInt(herois.size()));
+	public IPersonagem randomizarHerois() {
+		IPersonagem heroiRandom = this.herois.get(this.random.nextInt(herois.size()));
 		if(heroiRandom != null) {
 			return heroiRandom;
 		}else {
@@ -54,7 +55,7 @@ public class Duelo  implements IDuelo{
 		}
 	}
 	
-	protected boolean validarHerois(Personagem heroi1, Personagem heroi2 ) {
+	public boolean validarHerois(IPersonagem heroi1, IPersonagem heroi2 ) {
 		boolean valido = false;
 		if((!heroi2.getAlinhamento().equals(heroi1.getAlinhamento()))
 				&& heroi1 != heroi2) {
@@ -65,8 +66,8 @@ public class Duelo  implements IDuelo{
 	
 	
 	//retorna o heroi vencedor
-	protected Personagem iniciarCombate(Personagem heroi1, Personagem heroi2){
-		Personagem resultado;
+	public IPersonagem iniciarCombate(IPersonagem heroi1, IPersonagem heroi2){
+		IPersonagem resultado;
 		switch(EnumPersonagemHabilidades.getRandomHabilidades(this.random)) {
 		case INTELIGENCIA:
 			logger.info("Habilidade: Inteligência");
@@ -139,12 +140,12 @@ public class Duelo  implements IDuelo{
 	}
 	
 	//retorna o heroi vencedor ou em caso de empate null
-	private Personagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,
-			Personagem heroi1,Personagem heroi2, EnumPersonagemHabilidades habilidadeEscolhida){
+	private IPersonagem compararHabilidades(Integer heroi1Hab,Integer heroi2Hab,
+			IPersonagem heroi1,IPersonagem heroi2, EnumPersonagemHabilidades habilidadeEscolhida){
 		logger.info("Pontos do heroi 1: " + heroi1Hab);
 		logger.info("Pontos do heroi 2: " + heroi2Hab);
 		int resultado = heroi1Hab.compareTo(heroi2Hab);
-		Personagem vencedor = null;
+		IPersonagem vencedor = null;
 		switch(resultado) {
 			case 0:
 				logger.info("Empate");

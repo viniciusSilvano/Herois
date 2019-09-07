@@ -44,70 +44,87 @@ public class Personagem implements IPersonagem {
 		this.combate = combate;
 		this.defesa = defesa;
 	}
-	
+	@Override
 	public Integer getDefesa() {
 		return defesa;
 	}
+	@Override
 	public void setDefesa(Integer defesa) {
 		this.defesa = defesa;
 	}
+	@Override
 	public String getNome() {
 		return nome;
 	}
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	@Override
 	public String getAlinhamento() {
 		return alinhamento;
 	}
+	@Override
 	public void setAlinhamento(String alinhamento) {
 		this.alinhamento = alinhamento;
 	}
+	@Override
 	public Integer getInteligencia() {
 		return inteligencia;
 	}
+	@Override
 	public void setInteligencia(Integer inteligencia) {
 		this.inteligencia = inteligencia;
 	}
+	@Override
 	public Integer getForca() {
 		return forca;
 	}
+	@Override
 	public void setForca(Integer forca) {
 		this.forca = forca;
 	}
+	@Override
 	public Integer getDestreza() {
 		return destreza;
 	}
+	@Override
 	public void setDestreza(Integer destreza) {
 		this.destreza = destreza;
 	}
+	@Override
 	public Integer getPoder() {
 		return poder;
 	}
+	@Override
 	public void setPoder(Integer poder) {
 		this.poder = poder;
 	}
+	@Override
 	public Integer getCombate() {
 		return combate;
 	}
+	@Override
 	public void setCombate(Integer combate) {
 		this.combate = combate;
 	}
-	
+	@Override
 	public boolean isVencedor() {
 		return this.situacao.equals(EnumPersonagemSituacao.VENCEDOR);
 	}
-	
+	@Override
 	public EnumPersonagemSituacao getSituacao() {
 		return situacao;
 	}
+	@Override
 	public void setSituacao(EnumPersonagemSituacao situacao) {
 		this.situacao = situacao;
 	}
-	
+	@Override
 	public Integer getVitorias() {
 		return vitorias;
 	}
+	@Override
 	public void setVitorias(Integer vitorias) {
 		this.vitorias = vitorias;
 	}

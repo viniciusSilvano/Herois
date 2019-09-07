@@ -2,7 +2,7 @@ package com.stefanini.heroi.dto;
 
 import java.io.Serializable;
 
-import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.util.enuns.EnumPersonagemHabilidades;
 
 public class PlacarDTO implements Serializable{
@@ -10,13 +10,13 @@ public class PlacarDTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -3214932952899046334L;
-	private Personagem vencedor;
-	private Personagem perdedor;
+	private IPersonagem vencedor;
+	private IPersonagem perdedor;
 	private EnumPersonagemHabilidades habilidade;
 	private Integer vencedorHabilidadeValor;
 	private Integer perdedorHabilidadeValor;
 	
-	public PlacarDTO(Personagem vencedor, Personagem perdedor,
+	public PlacarDTO(IPersonagem vencedor, IPersonagem perdedor,
 			Integer vencedorHabilidadeValor, Integer perdedorHabilidadeValor, EnumPersonagemHabilidades habilidade) {
 		this.vencedor = vencedor;
 		this.perdedor = perdedor;
@@ -25,11 +25,11 @@ public class PlacarDTO implements Serializable{
 		this.habilidade = habilidade;
 	}
 
-	public Personagem getVencedor() {
+	public IPersonagem getVencedor() {
 		return vencedor;
 	}
 
-	public Personagem getPerdedor() {
+	public IPersonagem getPerdedor() {
 		return perdedor;
 	}
 

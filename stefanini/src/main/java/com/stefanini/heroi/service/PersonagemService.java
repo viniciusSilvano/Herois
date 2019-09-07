@@ -3,16 +3,16 @@ package com.stefanini.heroi.service;
 import org.springframework.stereotype.Service;
 
 import com.stefanini.heroi.bo.partida.Partida;
-import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
 
 @Service
 public class PersonagemService {
 	PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
-	public Personagem getMutante() throws NullPointerException{
+	public IPersonagem getMutante() throws NullPointerException{
 		if(Partida.getMutante() == null) {
 			try {
-				return (Personagem) personagemFactory.getObject(
+				return personagemFactory.getObject(
 						"N/A",
 						"N/A",
 						Integer.valueOf(0),

@@ -3,6 +3,7 @@ package com.stefanini.heroi.dto;
 import java.io.Serializable;
 
 import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 
 public class PersonagemDTO implements Serializable {
 	/**
@@ -38,7 +39,7 @@ public class PersonagemDTO implements Serializable {
 		this.defesa = defesa;
 	}
 	
-	public static PersonagemDTO converterMutanteParaDTO(Personagem personagem) {
+	public static PersonagemDTO converterMutanteParaDTO(IPersonagem personagem) {
 		return new PersonagemDTO(personagem.getNome(),
 				personagem.getInteligencia(),
 				personagem.getForca(),

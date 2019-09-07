@@ -1,7 +1,7 @@
 package com.stefanini.heroi.util;
 
-import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 
 public interface IAtributo {
-	void alterarAtributo(Personagem heroi1,Personagem heroi2, Personagem vencedor);
+	void alterarAtributo(IPersonagem heroi1, IPersonagem heroi2, IPersonagem vencedor);
 }

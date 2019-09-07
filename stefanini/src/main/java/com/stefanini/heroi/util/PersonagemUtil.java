@@ -10,6 +10,7 @@ import java.util.List;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 
 public class PersonagemUtil {
 	
@@ -62,7 +63,7 @@ public class PersonagemUtil {
 		return personagemDtos;
 	}
 	
-	public static Personagem PersonagemComparator(Personagem personagem1, Personagem personagem2, int valor1, int valor2) {
+	public static IPersonagem PersonagemComparator(IPersonagem personagem1, IPersonagem personagem2, int valor1, int valor2) {
 		if(valor1 > valor2) {
 			return personagem1;
 		}else {

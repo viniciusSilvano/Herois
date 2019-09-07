@@ -2,12 +2,12 @@ package com.stefanini.heroi.util.enuns;
 
 import java.util.Random;
 
-import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.util.IAtributo;
 
 public enum EnumPersonagemHabilidades implements IAtributo {
 	INTELIGENCIA{
-		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+		public void alterarAtributo(IPersonagem heroi1, IPersonagem heroi2, IPersonagem vencedor){
 			if(vencedor != null) {
 				if(vencedor == heroi1) {
 					heroi1.setInteligencia(heroi1.getInteligencia() + 2);
@@ -22,7 +22,7 @@ public enum EnumPersonagemHabilidades implements IAtributo {
 		}
 	},
 	FORCA{
-		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+		public void alterarAtributo(IPersonagem heroi1, IPersonagem heroi2, IPersonagem vencedor){
 			if(vencedor != null) {
 				if(vencedor == heroi1) {
 					heroi1.setForca(heroi1.getForca() + 2);
@@ -35,7 +35,7 @@ public enum EnumPersonagemHabilidades implements IAtributo {
 			}
 		}
 	},DESTREZA{
-		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+		public void alterarAtributo(IPersonagem heroi1, IPersonagem heroi2, IPersonagem vencedor){
 			if(vencedor != null) {
 				if(vencedor == heroi1) {
 					heroi1.setDestreza(heroi1.getDestreza() + 2);
@@ -48,7 +48,7 @@ public enum EnumPersonagemHabilidades implements IAtributo {
 			}
 		}
 	}, PODER{
-		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+		public void alterarAtributo(IPersonagem heroi1, IPersonagem heroi2, IPersonagem vencedor){
 			if(vencedor != null) {
 				if(vencedor == heroi1) {
 					heroi1.setPoder(heroi1.getPoder() + 2);
@@ -61,7 +61,7 @@ public enum EnumPersonagemHabilidades implements IAtributo {
 			}
 		}
 	}, COMBATE{
-		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+		public void alterarAtributo(IPersonagem heroi1, IPersonagem heroi2, IPersonagem vencedor){
 			if(vencedor != null) {
 				if(vencedor == heroi1) {
 					heroi1.setCombate(heroi1.getCombate() + 2);
@@ -74,7 +74,7 @@ public enum EnumPersonagemHabilidades implements IAtributo {
 			}
 		}
 	},DEFESA{
-		public void alterarAtributo(Personagem heroi1, Personagem heroi2, Personagem vencedor){
+		public void alterarAtributo(IPersonagem heroi1, IPersonagem heroi2, IPersonagem vencedor){
 			if(vencedor != null) {
 				if(vencedor == heroi1) {
 					heroi1.setDefesa(heroi1.getDefesa() + 2);
