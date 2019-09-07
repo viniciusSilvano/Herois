@@ -2,7 +2,6 @@ package com.stefanini.heroi.dto;
 
 import java.io.Serializable;
 
-import com.stefanini.heroi.model.Personagem;
 import com.stefanini.heroi.model.factory.EnumTiposPersonagens;
 import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
@@ -127,12 +126,6 @@ public class PersonagemDTO implements Serializable {
 	private String getAlinhamento() {
 		return alinhamento;
 	}
-
-	private void setAlinhamento(String alinhamento) {
-		this.alinhamento = alinhamento;
-	}
-	
-	
 	
 }
 
