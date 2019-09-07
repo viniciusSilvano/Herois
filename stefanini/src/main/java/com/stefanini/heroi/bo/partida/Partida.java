@@ -11,6 +11,7 @@ import com.stefanini.heroi.bo.partida.factory.DueloFactory;
 import com.stefanini.heroi.bo.partida.factory.IDuelo;
 import com.stefanini.heroi.bo.partida.factory.IPartida;
 import com.stefanini.heroi.dto.PlacarDTO;
+import com.stefanini.heroi.model.factory.EnumTiposPersonagens;
 import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
 import com.stefanini.heroi.util.GlobalStrings;
@@ -87,7 +88,7 @@ public class Partida implements IPartida {
 					IPersonagem vencedor = duelo.iniciarCombate(heroi1, heroi2);
 					
 					//validar o resultado do duelo
-					validarResultadoDuelo(duelo,heroi1,heroi2,vencedor);
+					vencedor = validarResultadoDuelo(duelo,heroi1,heroi2,vencedor);
 					
 					heroi1 = vencedor;
 					heroi2 = duelo.randomizarHerois();
@@ -117,7 +118,7 @@ public class Partida implements IPartida {
 		}
 	}
 	
-	private void validarResultadoDuelo(IDuelo duelo, IPersonagem heroi1,IPersonagem heroi2, IPersonagem vencedor) {
+	private IPersonagem validarResultadoDuelo(IDuelo duelo, IPersonagem heroi1,IPersonagem heroi2, IPersonagem vencedor) {
 		int tentativasDeDesempate = 0;
 		//enquanto o vencedor não for definido reinicie o combate
 		while(vencedor == null) {
@@ -129,6 +130,8 @@ public class Partida implements IPartida {
 			}
 			tentativasDeDesempate++;
 		}
+		return vencedor;
+		
 	}
 	private void definirSegundoEPrimerioLugar() {
 		try {	
@@ -143,7 +146,7 @@ public class Partida implements IPartida {
 					.filter(x -> !x.equals(this.getPrimeiroLugar()))
 					.max((x,y) -> x.getVitorias().compareTo(y.getVitorias()))
 					.orElse( personagemFactory
-							.getObject("N/A", "N/A", 
+							.getObject(EnumTiposPersonagens.COMUM,"N/A", "N/A", 
 									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), 
 									Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0))));
 			

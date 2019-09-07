@@ -3,7 +3,9 @@ package com.stefanini.heroi.dto;
 import java.io.Serializable;
 
 import com.stefanini.heroi.model.Personagem;
+import com.stefanini.heroi.model.factory.EnumTiposPersonagens;
 import com.stefanini.heroi.model.factory.IPersonagem;
+import com.stefanini.heroi.model.factory.PersonagemFactory;
 
 public class PersonagemDTO implements Serializable {
 	/**
@@ -17,12 +19,14 @@ public class PersonagemDTO implements Serializable {
 	private Integer poder;
 	private Integer combate;
 	private Integer defesa;
+	private String alinhamento;
 	
 	public PersonagemDTO() {
 		
 	}
 	
 	public PersonagemDTO(String nome,
+		String alinhamento,
 		Integer inteligencia,
 		Integer forca,
 		Integer destreza,
@@ -37,16 +41,31 @@ public class PersonagemDTO implements Serializable {
 		this.poder = poder;
 		this.combate = combate;
 		this.defesa = defesa;
+		this.alinhamento = alinhamento;
 	}
 	
-	public static PersonagemDTO converterMutanteParaDTO(IPersonagem personagem) {
+	public static PersonagemDTO converterPersonagemParaDTO(IPersonagem personagem) {
 		return new PersonagemDTO(personagem.getNome(),
+				personagem.getAlinhamento(),
 				personagem.getInteligencia(),
 				personagem.getForca(),
 				personagem.getDestreza(),
 				personagem.getPoder(),
 				personagem.getCombate(),
 				personagem.getDefesa());
+	}
+	
+	public static IPersonagem converterDTOParaPersonagem(EnumTiposPersonagens tipo ,PersonagemDTO personagem) {
+		try {
+			return PersonagemFactory.getInstace().
+					getObject(tipo,personagem.getNome(),personagem.getAlinhamento(),personagem.getInteligencia(), 
+							personagem.getForca(),personagem.getDestreza(),personagem.getPoder(),
+							personagem.getCombate(), personagem.getDefesa());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		throw new IllegalStateException("Erro ao converter personagemDTO para Ipersonagem");
 	}
 
 	public String getNome() {
@@ -104,6 +123,16 @@ public class PersonagemDTO implements Serializable {
 	public void setDefesa(Integer defesa) {
 		this.defesa = defesa;
 	}
+
+	private String getAlinhamento() {
+		return alinhamento;
+	}
+
+	private void setAlinhamento(String alinhamento) {
+		this.alinhamento = alinhamento;
+	}
+	
+	
 	
 }
 

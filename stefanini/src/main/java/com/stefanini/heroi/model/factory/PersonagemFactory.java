@@ -24,13 +24,19 @@ public class PersonagemFactory implements FactoryBean<IPersonagem> {
 	
 	@Override
 	public IPersonagem getObject() throws Exception {
-		// TODO Auto-generated method stub
 		return new Personagem();
 	}
 	
-	public IPersonagem getObject(String nome, String alinhamento, Integer inteligencia,
+	public IPersonagem getObject(EnumTiposPersonagens tipo,String nome, String alinhamento, Integer inteligencia,
 			Integer forca, Integer destreza, Integer poder, Integer combate, Integer defesa) throws Exception{
-		return new Personagem(nome, alinhamento, inteligencia, forca, destreza, poder, combate, defesa);
+		switch(tipo) {
+		
+			case COMUM:
+				return new Personagem(nome, alinhamento, inteligencia, forca, destreza, poder, combate, defesa);
+			default:
+				return new Personagem(nome, alinhamento, inteligencia, forca, destreza, poder, combate, defesa);
+		}
+		
 	}
 
 	@Override

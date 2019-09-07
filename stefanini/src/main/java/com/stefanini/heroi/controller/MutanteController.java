@@ -23,9 +23,9 @@ public class MutanteController {
 	@RequestMapping(value = "/mutante", method = RequestMethod.GET)
 	public ResponseEntity<PersonagemDTO> getMutante(HttpServletResponse response) throws IOException {
 		try {
-			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.OK);
+			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterPersonagemParaDTO(personagemService.getMutante()),HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterMutanteParaDTO(personagemService.getMutante()),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<PersonagemDTO>(PersonagemDTO.converterPersonagemParaDTO(personagemService.getMutante()),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }
