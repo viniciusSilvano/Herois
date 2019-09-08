@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 
 import com.stefanini.heroi.bo.partida.factory.DueloFactory;
-import com.stefanini.heroi.bo.partida.factory.IDuelo;
 import com.stefanini.heroi.bo.partida.factory.IPartida;
 import com.stefanini.heroi.dto.PlacarDTO;
 import com.stefanini.heroi.model.factory.EnumTiposPersonagens;
@@ -72,7 +71,7 @@ public class Partida implements IPartida {
 				//iniciar a contagem das 10s partidas
 				while(counter < quantidade) {
 					
-					this.validarHerois(duelo, heroi1, heroi2);
+					heroi2 = this.validarHerois(duelo, heroi1, heroi2);
 					logger.info(GlobalStrings.LINE_SEPARATOR);
 					logger.info("Heroi 1: " + heroi1.getNome());
 					logger.info("Heroi 2: " + heroi2.getNome());
@@ -106,10 +105,12 @@ public class Partida implements IPartida {
 		}
 		
 	}
-	private void validarHerois(Duelo duelo, IPersonagem heroi1, IPersonagem heroi2) {
+	private IPersonagem validarHerois(Duelo duelo, IPersonagem heroi1, IPersonagem heroi2) {
+		//retorna um oponente valido para o heroi1 e o heroi1 pode ser o vencedor também.
 		while(!duelo.validarHerois(heroi1, heroi2)) {
 			heroi2 = duelo.randomizarHerois();
 		}
+		return heroi2;
 	}
 	
 	private IPersonagem validarResultadoDuelo(Duelo duelo, IPersonagem heroi1,IPersonagem heroi2, IPersonagem vencedor) {
@@ -120,6 +121,7 @@ public class Partida implements IPartida {
 			//se não desempatar após 3 tentativas traga um novo heroi.
 			if(tentativasDeDesempate > 3) {
 				heroi2 = duelo.randomizarHerois();
+				this.validarHerois(duelo, heroi1, heroi2);
 				tentativasDeDesempate = 0;
 			}
 			tentativasDeDesempate++;
