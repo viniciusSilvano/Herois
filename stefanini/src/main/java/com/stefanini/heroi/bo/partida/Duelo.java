@@ -46,7 +46,7 @@ public class Duelo  implements IDuelo{
 	}
 	
 	
-	public IPersonagem randomizarHerois() {
+	protected IPersonagem randomizarHerois() {
 		IPersonagem heroiRandom = this.herois.get(this.random.nextInt(herois.size()));
 		if(heroiRandom != null) {
 			return heroiRandom;
@@ -55,7 +55,7 @@ public class Duelo  implements IDuelo{
 		}
 	}
 	
-	public boolean validarHerois(IPersonagem heroi1, IPersonagem heroi2 ) {
+	protected boolean validarHerois(IPersonagem heroi1, IPersonagem heroi2 ) {
 		boolean valido = false;
 		if((!heroi2.getAlinhamento().equals(heroi1.getAlinhamento()))
 				&& heroi1 != heroi2) {
@@ -66,7 +66,7 @@ public class Duelo  implements IDuelo{
 	
 	
 	//retorna o heroi vencedor
-	public IPersonagem iniciarCombate(IPersonagem heroi1, IPersonagem heroi2){
+	protected IPersonagem iniciarCombate(IPersonagem heroi1, IPersonagem heroi2){
 		IPersonagem resultado;
 		switch(EnumPersonagemHabilidades.getRandomHabilidades(this.random)) {
 		case INTELIGENCIA:

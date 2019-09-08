@@ -57,10 +57,10 @@ public class Partida implements IPartida {
 
 		try {
 			
-			IDuelo duelo = null;
+			Duelo duelo = null;
 			int counter = 0;
-			
-				duelo =  dueloFactory.getObject();
+				
+				duelo = (Duelo) dueloFactory.getObject();
 				
 				//Randomizar dois herois aleatórios
 				IPersonagem heroi1 = duelo.randomizarHerois();
@@ -106,13 +106,13 @@ public class Partida implements IPartida {
 		}
 		
 	}
-	private void validarHerois(IDuelo duelo, IPersonagem heroi1, IPersonagem heroi2) {
+	private void validarHerois(Duelo duelo, IPersonagem heroi1, IPersonagem heroi2) {
 		while(!duelo.validarHerois(heroi1, heroi2)) {
 			heroi2 = duelo.randomizarHerois();
 		}
 	}
 	
-	private IPersonagem validarResultadoDuelo(IDuelo duelo, IPersonagem heroi1,IPersonagem heroi2, IPersonagem vencedor) {
+	private IPersonagem validarResultadoDuelo(Duelo duelo, IPersonagem heroi1,IPersonagem heroi2, IPersonagem vencedor) {
 		int tentativasDeDesempate = 0;
 		//enquanto o vencedor não for definido reinicie o combate
 		while(vencedor == null) {
