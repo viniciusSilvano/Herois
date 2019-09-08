@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.stefanini.heroi.bo.partida.Partida;
+import com.stefanini.heroi.bo.partida.factory.IPartida;
 import com.stefanini.heroi.bo.partida.factory.PartidaFactory;
 import com.stefanini.heroi.dto.PlacarDTO;
 
@@ -14,7 +14,7 @@ public class PartidaService {
 	
 	public List<PlacarDTO> iniciarPartidasERetornarPlacar() throws NullPointerException{
 		try {
-			Partida partida = (Partida) partidaFactory.getObject();
+			IPartida partida = partidaFactory.getObject();
 			partida.iniciarPartidas(10);
 			return partida.getPlacares();
 		}catch(ClassCastException e) {

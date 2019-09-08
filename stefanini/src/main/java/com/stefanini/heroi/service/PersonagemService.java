@@ -2,7 +2,7 @@ package com.stefanini.heroi.service;
 
 import org.springframework.stereotype.Service;
 
-import com.stefanini.heroi.bo.partida.Partida;
+import com.stefanini.heroi.bo.partida.Mutante;
 import com.stefanini.heroi.model.factory.EnumTiposPersonagens;
 import com.stefanini.heroi.model.factory.IPersonagem;
 import com.stefanini.heroi.model.factory.PersonagemFactory;
@@ -11,7 +11,7 @@ import com.stefanini.heroi.model.factory.PersonagemFactory;
 public class PersonagemService {
 	PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
 	public IPersonagem getMutante() throws NullPointerException{
-		if(Partida.getMutante() == null) {
+		if(Mutante.getMutante() == null) {
 			try {
 				return personagemFactory.getObject(
 						EnumTiposPersonagens.COMUM,
@@ -29,7 +29,7 @@ public class PersonagemService {
 			}
 			return null;
 		}else {
-			return Partida.getMutante();
+			return Mutante.getMutante();
 		}
 	}
 }

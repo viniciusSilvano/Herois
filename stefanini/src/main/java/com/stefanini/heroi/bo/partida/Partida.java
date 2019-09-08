@@ -22,7 +22,7 @@ public class Partida implements IPartida {
 	private PersonagemFactory personagemFactory = PersonagemFactory.getInstace();
 	private List<PlacarDTO> placares = new ArrayList<>();
 	private Logger logger = Logger.getLogger(Partida.class);
-	private static IPersonagem mutante;
+	
 	private IPersonagem primeiroLugar;
 	private IPersonagem segundoLugar;
 			
@@ -51,13 +51,7 @@ public class Partida implements IPartida {
 		
 	}
 	
-	public static IPersonagem getMutante() {
-		return mutante;
-	}
-
-	public static void setMutante(IPersonagem iPersonagem) {
-		Partida.mutante = iPersonagem;
-	}
+	
 	
 	public void iniciarPartidas(int quantidade) {
 
@@ -171,33 +165,33 @@ public class Partida implements IPartida {
 	
 	private void criarMutante() {
 		try {
-			Partida.setMutante(personagemFactory.getObject());
+			Mutante.setMutante(personagemFactory.getObject());
 		}catch (ClassCastException e) {
 			logger.error("Erro de polimorfismo ao tentar criar o mutante");
 		} 
 		catch (Exception e) {
 			logger.error("Erro ao tentar criar mutante");
 		}
-		Partida.getMutante().setNome("O Mutante");
-		Partida.getMutante().setCombate(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar(),
+		Mutante.getMutante().setNome("O Mutante");
+		Mutante.getMutante().setCombate(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar(),
 				this.getPrimeiroLugar().getCombate() ,this.getSegundoLugar().getCombate()).getCombate());
 		
-		Partida.getMutante().setDefesa(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+		Mutante.getMutante().setDefesa(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
 				this.getPrimeiroLugar().getDefesa() ,this.getSegundoLugar().getDefesa()).getDefesa());
 		
-		Partida.getMutante().setDestreza(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+		Mutante.getMutante().setDestreza(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
 				this.getPrimeiroLugar().getDestreza() ,this.getSegundoLugar().getDestreza()).getDestreza());
 		
-		Partida.getMutante().setForca(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+		Mutante.getMutante().setForca(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
 				this.getPrimeiroLugar().getForca() ,this.getSegundoLugar().getForca()).getForca());
 		
-		Partida.getMutante().setInteligencia(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+		Mutante.getMutante().setInteligencia(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
 				this.getPrimeiroLugar().getInteligencia() ,this.getSegundoLugar().getInteligencia()).getInteligencia());
 		
-		Partida.getMutante().setPoder(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
+		Mutante.getMutante().setPoder(PersonagemUtil.PersonagemComparator(this.getPrimeiroLugar(),this.getSegundoLugar() ,
 				this.getPrimeiroLugar().getPoder() ,this.getSegundoLugar().getPoder()).getPoder());
 		
-		logger.info("Mutante criado: " + Partida.getMutante());
+		logger.info("Mutante criado: " + Mutante.getMutante());
 	}
 	
 }
